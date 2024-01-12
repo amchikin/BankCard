@@ -27,4 +27,6 @@ public class PersonDTO {
     @NotNull(message = "Data should not be empty")
     private Date birthday;
 
+    //public PersonDTO(){}
+
 }

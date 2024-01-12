@@ -10,7 +10,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 import java.util.List;
 
+//@Builder
 @Data
+//@NoArgsConstructor
+//@AllArgsConstructor
 @Entity
 @Table(name="Person")
 public class Person {
@@ -38,5 +41,7 @@ public class Person {
 
     @OneToMany(mappedBy = "owner")
     private List<Account> accounts;
+
+    //public Person(){} // Вычитал: Вам понадобится пустой конструктор, чтобы Джексон мог правильно выполнить действия десериализации.
 
 }
