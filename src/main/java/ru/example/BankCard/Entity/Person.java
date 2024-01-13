@@ -10,13 +10,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 import java.util.List;
 
-//@Builder
 @Data
-//@NoArgsConstructor
-//@AllArgsConstructor
 @Entity
 @Table(name="Person")
-public class Person {
+public class Person extends AbstractEntity {
 
     @Id
     @Column(name = "id")
@@ -34,14 +31,12 @@ public class Person {
     private String name;
 
     @Column(name="birthday")
-    @Temporal(TemporalType.DATE) // что бы Спринг понял, что это дата
-    @DateTimeFormat(pattern = "yyyy-MM-dd") // чтобы авто парсить // Чтобы красиво выводить сообщение об ошибке нужно добавить Спринг-Валидатор(урок 41) TODO
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd") // TODO Add Spring Validator
     @NotNull(message = "Data should not be empty")
     private Date birthday;
 
     @OneToMany(mappedBy = "owner")
     private List<Account> accounts;
-
-    //public Person(){} // Вычитал: Вам понадобится пустой конструктор, чтобы Джексон мог правильно выполнить действия десериализации.
 
 }

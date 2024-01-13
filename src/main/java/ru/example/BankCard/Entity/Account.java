@@ -4,19 +4,13 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.math.BigInteger;
-//@Builder
 @Data
-//@NoArgsConstructor
-//@AllArgsConstructor
 @Entity
 @Table(name="Account")
-public class Account {
+public class Account extends AbstractEntity {
 
     @Id
     @Column(name = "id")
@@ -38,7 +32,6 @@ public class Account {
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person owner;
 
-    //public Account(){}
 }
 
 
