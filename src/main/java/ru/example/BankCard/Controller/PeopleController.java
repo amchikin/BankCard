@@ -60,7 +60,7 @@ public class PeopleController {
     @ExceptionHandler
     private ResponseEntity<PeopleErrorResponse> handleException(PersonNotFoundException e) {
         PeopleErrorResponse response = new PeopleErrorResponse(
-          "Person with current id wasn`t found", System.currentTimeMillis()
+          "Person with current id does not exist in the database", System.currentTimeMillis()
         );
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }

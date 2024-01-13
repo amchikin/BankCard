@@ -18,4 +18,7 @@ public class AccountDTO extends AbstractDTO {
     @Min(value = 0, message = "Баланс не может быть отрицательным")
     private BigInteger balance;
 
+    int person_id; // TODO не отображается - разобраться
+
+
 }

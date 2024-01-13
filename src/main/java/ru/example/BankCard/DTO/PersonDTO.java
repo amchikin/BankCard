@@ -26,9 +26,4 @@ public class PersonDTO extends AbstractDTO {
     @NotNull(message = "Data should not be empty")
     private Date birthday;
 
-    //private List<Account> accounts;
-
-
-
-
 }
