@@ -5,6 +5,9 @@ import ru.example.BankCard.DTO.PersonDTO;
 
 import java.util.List;
 
+/*
+Интерфейс для работы с сущностью People
+ */
 public interface PeopleService {
 
     List<PersonDTO> findAll();
