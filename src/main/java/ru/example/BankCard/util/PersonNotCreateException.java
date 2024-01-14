@@ -1,4 +1,4 @@
-package ru.example.BankCard.Util;
+package ru.example.BankCard.util;
 
 public class PersonNotCreateException extends RuntimeException {
     public PersonNotCreateException(String msg) {

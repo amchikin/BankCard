@@ -1,4 +1,4 @@
-package ru.example.BankCard.Entity;
+package ru.example.BankCard.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;

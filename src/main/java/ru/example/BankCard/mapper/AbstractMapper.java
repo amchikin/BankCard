@@ -1,14 +1,14 @@
-package ru.example.BankCard.Mapper;
+package ru.example.BankCard.mapper;
 
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.example.BankCard.DTO.AbstractDTO;
-import ru.example.BankCard.Entity.AbstractEntity;
+import ru.example.BankCard.dto.AbstractDto;
+import ru.example.BankCard.entity.AbstractEntity;
 
 import java.util.Objects;
 
-public abstract class AbstractMapper<E extends AbstractEntity, D extends AbstractDTO> implements Mapper<E, D> {
+public abstract class AbstractMapper<E extends AbstractEntity, D extends AbstractDto> implements Mapper<E, D> {
 
     @Autowired
     ModelMapper mapper;

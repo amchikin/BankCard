@@ -1,4 +1,4 @@
-package ru.example.BankCard.Util;
+package ru.example.BankCard.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

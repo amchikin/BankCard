@@ -1,42 +1,29 @@
-package ru.example.BankCard.Entity;
+package ru.example.BankCard.dto;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
-import java.util.List;
+
 
 @Data
-@Entity
-@Table(name="Person")
-public class Person extends AbstractEntity {
-
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class PersonDto extends AbstractDto {
 
     @Size(min = 2, max = 30, message = "Surname should be between 2 and 30 characters")
     @NotEmpty(message = "Name should not be empty")
-    @Column(name = "surname")
     private String surname;
 
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     @NotEmpty(message = "Name should not be empty")
-    @Column(name = "name")
     private String name;
 
-    @Column(name="birthday")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd") // TODO Add Spring Validator
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Data should not be empty")
     private Date birthday;
-
-    @OneToMany(mappedBy = "owner")
-    private List<Account> accounts;
 
 }

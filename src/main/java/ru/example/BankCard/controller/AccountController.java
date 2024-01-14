@@ -1,12 +1,11 @@
-package ru.example.BankCard.Controller;
+package ru.example.BankCard.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.example.BankCard.DTO.AccountDTO;
-import ru.example.BankCard.DTO.PersonDTO;
-import ru.example.BankCard.Service.AccountService;
+import ru.example.BankCard.dto.AccountDto;
+import ru.example.BankCard.service.AccountService;
 
 import java.util.List;
 
@@ -22,9 +21,11 @@ public class AccountController {
     }
 
     @GetMapping()
-    public List<AccountDTO> getAccounts() {
+    public List<AccountDto> getAccounts() {
         return accountService.findAll();
     }
+
+    // Add
 
 
 }
