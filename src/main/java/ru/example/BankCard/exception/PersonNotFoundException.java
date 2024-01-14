@@ -1,4 +1,5 @@
-package ru.example.BankCard.util;
+package ru.example.BankCard.exception;
 
 public class PersonNotFoundException extends RuntimeException{
+
 }

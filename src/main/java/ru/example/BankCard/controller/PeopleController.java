@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.example.BankCard.dto.AccountDto;
 import ru.example.BankCard.service.PeopleService;
 import ru.example.BankCard.dto.PersonDto;
-import ru.example.BankCard.util.PeopleErrorResponse;
-import ru.example.BankCard.util.PersonNotCreateException;
-import ru.example.BankCard.util.PersonNotFoundException;
+import ru.example.BankCard.exception.PeopleErrorResponse;
+import ru.example.BankCard.exception.PersonNotCreateException;
+import ru.example.BankCard.exception.PersonNotFoundException;
 
 import java.util.List;
 
@@ -23,12 +23,7 @@ import java.util.List;
 @RequestMapping("/people")
 public class PeopleController {
 
-    private final PeopleService peopleService;
-
-//    @Autowired // Создаётся Lombok`ом
-//    public PeopleController(PeopleService peopleService) {
-//        this.peopleService = peopleService;
-//    }
+    private final PeopleService peopleService; // Поле внедряется через конструктор авто средствами Lombok
 
     @GetMapping()
     public List<PersonDto> getPeople() {
@@ -50,44 +45,9 @@ public class PeopleController {
     @PostMapping
     public ResponseEntity<HttpStatus> create(@RequestBody @Valid PersonDto personDTO,
                                              BindingResult bindingResult) {
-        CreateErrors(bindingResult);
+        PeopleErrorResponse.CreateErrors(bindingResult);
         peopleService.save(personDTO);
         return ResponseEntity.ok(HttpStatus.OK);
     }
-
-
-    /////////////////////////////////////////////////////////
-   // Обработки ошибок - Куда их?
-    @ExceptionHandler
-    private ResponseEntity<PeopleErrorResponse> handleException(PersonNotFoundException e) {
-        PeopleErrorResponse response = new PeopleErrorResponse(
-          "Person with current id does not exist in the database", System.currentTimeMillis()
-        );
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler // метод который, ловит исключения и возвращает необходимый объект
-    private ResponseEntity<PeopleErrorResponse> handleException(PersonNotCreateException e) {
-        PeopleErrorResponse response = new PeopleErrorResponse(  // ResponseEntity - ?
-                e.getMessage(), System.currentTimeMillis()
-        );
-
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST); // NOT_FOUND - status 404
-    }
-
-    void CreateErrors(BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            StringBuilder errorMsg = new StringBuilder();
-            List<FieldError> errors = bindingResult.getFieldErrors();
-            for(FieldError error: errors){
-                errorMsg.append(error.getField())
-                        .append(" - ").append(error.getDefaultMessage())
-                        .append(";");
-            }
-            throw new PersonNotCreateException(errorMsg.toString());
-        }
-    }
-    // Обработки ошибок - Куда их?
-    /////////////////////////////////////////////////////////
 
 }

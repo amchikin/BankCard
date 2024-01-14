@@ -9,7 +9,7 @@ import ru.example.BankCard.mapper.AccountMapper;
 import ru.example.BankCard.mapper.PersonMapper;
 import ru.example.BankCard.repository.PeopleRepository;
 import ru.example.BankCard.entity.Person;
-import ru.example.BankCard.util.PersonNotFoundException;
+import ru.example.BankCard.exception.PersonNotFoundException;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package ru.example.BankCard.DTO;
+package ru.example.BankCard.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -9,7 +9,7 @@ import java.math.BigInteger;
 
 
 @Data
-public class AccountDTO extends AbstractDTO {
+public class AccountDto extends AbstractDto {
 
     @NotEmpty(message = "Поле номера карты не должно быть пустым")
     @Size(min = 16, max = 16, message = "Размер номера карты ровно 16")
@@ -18,7 +18,6 @@ public class AccountDTO extends AbstractDTO {
     @Min(value = 0, message = "Баланс не может быть отрицательным")
     private BigInteger balance;
 
-    int person_id; // TODO не отображается - разобраться
-
+    //private Integer person_id; // TODO не отображается - разобраться Проблема в маппере
 
 }
