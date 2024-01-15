@@ -18,7 +18,7 @@ public class AccountServiceImpl implements AccountService{
     private final AccountMapper accountMapper;
 
     @Autowired
-    public AccountServiceImpl(AccountsRepository accountsRepository, PeopleRepository peopleRepository, AccountMapper accountMapper) {
+    public AccountServiceImpl(AccountsRepository accountsRepository, AccountMapper accountMapper) {
         this.accountsRepository = accountsRepository;
         this.accountMapper = accountMapper;
     }

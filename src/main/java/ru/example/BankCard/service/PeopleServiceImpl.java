@@ -51,7 +51,7 @@ public class PeopleServiceImpl implements PeopleService {
         Optional<Person> person = peopleRepository.findById(id);
         if (person.isPresent()) {
             List<Account> accountList = person.get().getAccounts();
-            accountList.sort((o1, o2) -> o1.getBalance().compareTo(o2.getBalance()));
+            accountList.sort(Comparator.comparing(Account::getBalance));
             List<AccountDto> listAccountDTO = new ArrayList<>();
             accountList.forEach(element -> listAccountDTO.add(accountMapper.destinationToSource(element)));
             return listAccountDTO;
