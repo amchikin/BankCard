@@ -1,5 +1,6 @@
 package ru.example.BankCard.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.example.BankCard.dto.AccountDto;
 import ru.example.BankCard.dto.PersonDto;
@@ -13,19 +14,12 @@ import ru.example.BankCard.exception.PersonNotFoundException;
 import java.util.*;
 
 import static java.util.Collections.*;
-
+@RequiredArgsConstructor
 @Service
 public class PeopleServiceImpl implements PeopleService {
     private final PeopleRepository peopleRepository;
     private final PersonMapper personMapper;
     private final AccountMapper accountMapper;
-
-    public PeopleServiceImpl(PeopleRepository peopleRepository, PersonMapper personMapper, AccountMapper accountMapper) {
-        this.peopleRepository = peopleRepository;
-        this.personMapper = personMapper;
-        this.accountMapper = accountMapper;
-    }
-
 
     @Override
     public List<PersonDto> findAll() {  // TODO Подумать над лучшей реализацией. Через Stream

@@ -8,7 +8,6 @@ import ru.example.BankCard.exception.PeopleErrorResponse;
 import ru.example.BankCard.exception.PersonNotCreateException;
 import ru.example.BankCard.exception.PersonNotFoundException;
 
-
 @ControllerAdvice
 public class Advice {
 
