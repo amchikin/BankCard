@@ -7,15 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import ru.example.BankCard.dto.AccountDto;
 import ru.example.BankCard.service.PeopleService;
 import ru.example.BankCard.dto.PersonDto;
 import ru.example.BankCard.exception.PeopleErrorResponse;
-import ru.example.BankCard.exception.PersonNotCreateException;
-import ru.example.BankCard.exception.PersonNotFoundException;
-
 import java.util.List;
 
 @RequiredArgsConstructor

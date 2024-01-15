@@ -1,6 +1,5 @@
 package ru.example.BankCard.service;
 
-
 import org.springframework.stereotype.Service;
 import ru.example.BankCard.dto.AccountDto;
 import ru.example.BankCard.dto.PersonDto;
@@ -32,19 +31,19 @@ public class PeopleServiceImpl implements PeopleService {
     public List<PersonDto> findAll() {  // TODO Подумать над лучшей реализацией. Через Stream
         List<PersonDto> listPersonDTO = new ArrayList<>();
         List<Person> listPerson = peopleRepository.findAll();
-        listPerson.forEach(element -> listPersonDTO.add(personMapper.toDto(element)));
+        listPerson.forEach(element -> listPersonDTO.add(personMapper.destinationToSource(element)));
         return listPersonDTO;
     }
 
     @Override
     public PersonDto findOne(int id) {
         Optional<Person> foundPerson = peopleRepository.findById(id);
-        return personMapper.toDto(foundPerson.orElseThrow(PersonNotFoundException::new));
+        return personMapper.destinationToSource(foundPerson.orElseThrow(PersonNotFoundException::new));
     }
 
     @Override
     public PersonDto save(PersonDto personDTO) {
-       return personMapper.toDto(peopleRepository.save(personMapper.toEntity(personDTO)));
+       return personMapper.destinationToSource(peopleRepository.save(personMapper.sourceToDestination(personDTO)));
     }
 
     @Override
@@ -54,7 +53,7 @@ public class PeopleServiceImpl implements PeopleService {
             List<Account> accountList = person.get().getAccounts();
             accountList.sort((o1, o2) -> o1.getBalance().compareTo(o2.getBalance()));
             List<AccountDto> listAccountDTO = new ArrayList<>();
-            accountList.forEach(element -> listAccountDTO.add(accountMapper.toDto(element)));
+            accountList.forEach(element -> listAccountDTO.add(accountMapper.destinationToSource(element)));
             return listAccountDTO;
         }
         else {

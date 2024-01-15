@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.example.BankCard.dto.AccountDto;
 import ru.example.BankCard.entity.Account;
+
 import ru.example.BankCard.mapper.AccountMapper;
 import ru.example.BankCard.repository.AccountsRepository;
 import ru.example.BankCard.repository.PeopleRepository;
@@ -26,7 +27,7 @@ public class AccountServiceImpl implements AccountService{
     public List<AccountDto> findAll() {  // TODO Подумать над лучшей реализацией
         List<AccountDto> listAccountDTO = new ArrayList<>();
         List<Account> listAccount = accountsRepository.findAll();
-        listAccount.forEach(element -> listAccountDTO.add(accountMapper.toDto(element)));
+        listAccount.forEach(element -> listAccountDTO.add(accountMapper.destinationToSource(element)));
         return listAccountDTO;
     }
 
