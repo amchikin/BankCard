@@ -2,6 +2,7 @@ package ru.example.BankCard.service;
 
 import ru.example.BankCard.dto.AccountDto;
 import ru.example.BankCard.dto.PersonDto;
+import ru.example.BankCard.dto.ShowCardsResponseDto;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface PeopleService {
 
     PersonDto save(PersonDto personDTO);
 
-    List<AccountDto> getCardsByPersonId(int id);
+    ShowCardsResponseDto getCardsByPersonId(int id);
 
 
 

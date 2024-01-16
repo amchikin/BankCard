@@ -8,6 +8,6 @@ import ru.example.BankCard.entity.Account;
 @Mapper(componentModel = "spring")
 
 public interface AccountMapper {
-    Account sourceToDestination(AccountDto source);
-    AccountDto destinationToSource(Account destination);
+    Account toModel(AccountDto source);
+    AccountDto toDto(Account destination);
 }

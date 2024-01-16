@@ -26,4 +26,5 @@ public class Advice {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST); // NOT_FOUND - status 404
     }
 
+
 }

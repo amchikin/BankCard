@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.example.BankCard.dto.AccountDto;
+import ru.example.BankCard.dto.ShowCardsResponseDto;
 import ru.example.BankCard.service.PeopleService;
 import ru.example.BankCard.dto.PersonDto;
 import ru.example.BankCard.exception.PeopleErrorResponse;
@@ -34,7 +35,7 @@ public class PeopleController {
 
     // API 2 по ТЗ. Выводит инфо о всех картах человека по id (сортирует по возрастанию баланса). Пока не знаю как в вывод добавить ФИО в начало TODO
     @GetMapping("/{id}/cards")
-    public List<AccountDto> showCards(@PathVariable("id") int id) {
+    public ShowCardsResponseDto showCards(@PathVariable("id") int id) {
         return peopleService.getCardsByPersonId(id);
     }
 
