@@ -2,7 +2,7 @@ package ru.example.BankCard.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.example.BankCard.dto.AccountDto;
+
 import ru.example.BankCard.dto.PersonDto;
 
 import ru.example.BankCard.dto.ShowCardsResponseDto;
@@ -17,7 +17,6 @@ import ru.example.BankCard.exception.PersonNotFoundException;
 
 import java.util.*;
 
-import static java.util.Collections.*;
 @RequiredArgsConstructor
 @Service
 public class PeopleServiceImpl implements PeopleService {

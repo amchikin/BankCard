@@ -1,6 +1,5 @@
 package ru.example.BankCard.service;
 
-import ru.example.BankCard.dto.AccountDto;
 import ru.example.BankCard.dto.PersonDto;
 import ru.example.BankCard.dto.ShowCardsResponseDto;
 
