@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.example.BankCard.dto.AccountDto;
 import ru.example.BankCard.dto.ShowCardsResponseDto;
 import ru.example.BankCard.service.PeopleService;
 import ru.example.BankCard.dto.PersonDto;
@@ -27,13 +26,13 @@ public class PeopleController {
         return peopleService.findAll();
     }
 
-    // API 1 по ТЗ: Человек по id. Если нет нашёл - читаемы эксепш.
+    // API 1 по ТЗ: Человек по id. Если нет нашёл - читаемое исключение.
     @GetMapping("/{id}")
     public PersonDto getPerson(@PathVariable("id") int id) {
         return peopleService.findOne(id);
     }
 
-    // API 2 по ТЗ. Выводит инфо о всех картах человека по id (сортирует по возрастанию баланса). Пока не знаю как в вывод добавить ФИО в начало TODO
+    // API 2 по ТЗ. Выводит инфо о всех картах человека по id (сортирует по возрастанию баланса).
     @GetMapping("/{id}/cards")
     public ShowCardsResponseDto showCards(@PathVariable("id") int id) {
         return peopleService.getCardsByPersonId(id);

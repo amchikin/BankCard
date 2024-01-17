@@ -1,13 +1,13 @@
 package ru.example.BankCard.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 public class ShowCardsResponseDto extends AbstractDto{
-   // private String fio; // В сервисе Mapping
-    private String surname;
-    private String name;
+    private String fio;
     private List<AccountDto> accounts;
-
 }
