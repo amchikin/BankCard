@@ -15,7 +15,7 @@ import java.util.Date;
 public class PersonDto extends AbstractDto {
 
     @Size(min = 2, max = 30, message = "Surname should be between 2 and 30 characters")
-    @NotEmpty(message = "Name should not be empty")
+    @NotEmpty(message = "Surname should not be empty")
     private String surname;
 
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")

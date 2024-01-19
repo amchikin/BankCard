@@ -4,9 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import ru.example.BankCard.exception.PeopleErrorResponse;
-import ru.example.BankCard.exception.PersonNotCreateException;
-import ru.example.BankCard.exception.PersonNotFoundException;
+import ru.example.BankCard.exception.*;
 
 @ControllerAdvice
 public class Advice {
@@ -21,6 +19,14 @@ public class Advice {
     @ExceptionHandler
     private ResponseEntity<PeopleErrorResponse> handleException(PersonNotCreateException e) {
         PeopleErrorResponse response = new PeopleErrorResponse(  //
+                e.getMessage(), System.currentTimeMillis()
+        );
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST); // NOT_FOUND - status 404
+    }
+
+    @ExceptionHandler
+    private ResponseEntity<AccountErrorResponse> handleException(AccountNotCreateException e) {
+        AccountErrorResponse response = new AccountErrorResponse(  //
                 e.getMessage(), System.currentTimeMillis()
         );
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST); // NOT_FOUND - status 404
