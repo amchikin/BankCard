@@ -1,14 +1,11 @@
 package ru.example.BankCard.advice;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.example.BankCard.exception.*;
-
 @ControllerAdvice
 public class Advice {
-
     @ExceptionHandler  // метод который, ловит исключения и возвращает необходимый объект
     private ResponseEntity<PeopleErrorResponse> handleException(PersonNotFoundException e) {
         PeopleErrorResponse response = new PeopleErrorResponse(
@@ -23,7 +20,6 @@ public class Advice {
         );
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST); // NOT_FOUND - status 404
     }
-
     @ExceptionHandler
     private ResponseEntity<AccountErrorResponse> handleException(AccountNotCreateException e) {
         AccountErrorResponse response = new AccountErrorResponse(  //
@@ -31,6 +27,4 @@ public class Advice {
         );
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST); // NOT_FOUND - status 404
     }
-
-
 }
