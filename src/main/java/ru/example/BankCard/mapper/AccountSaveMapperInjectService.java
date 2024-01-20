@@ -14,7 +14,8 @@ public abstract class AccountSaveMapperInjectService {
     @Autowired  // TODO Почему подчёркивает и как сделать лучше
     protected AccountSaveMapperService accountSaveMapperService;
 
-    @Mapping(target = "owner", expression = "java(accountSaveMapperService.ownerById(source.getPerson_id()))")
+    @Mapping(target = "owner",
+            expression = "java(accountSaveMapperService.ownerById(source.getPerson_id()))")
     public abstract Account ToModel(AccountSaveDto source);
 
 

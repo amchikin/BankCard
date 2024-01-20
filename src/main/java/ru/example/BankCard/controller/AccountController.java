@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.example.BankCard.dto.AccountChangeBalanceDto;
 import ru.example.BankCard.dto.AccountDto;
 import ru.example.BankCard.dto.AccountSaveDto;
 import ru.example.BankCard.dto.PersonDto;
@@ -26,14 +27,20 @@ public class AccountController {
         return accountService.findAll();
     }
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<HttpStatus> create(@RequestBody @Valid AccountSaveDto accountSaveDto,
                                              BindingResult bindingResult) {
         AccountErrorResponse.CreateErrors(bindingResult);
         accountService.save(accountSaveDto);
         return ResponseEntity.ok(HttpStatus.OK);
     }
-    // Add
+
+    @PostMapping("/change_balance")
+    public ResponseEntity<HttpStatus> changeBalance(@RequestBody @Valid AccountChangeBalanceDto accountChangeBalanceDto,
+                                                    BindingResult bindingResult){
+        accountService.changeBalance(accountChangeBalanceDto);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
 
 
 }

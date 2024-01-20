@@ -1,5 +1,6 @@
 package ru.example.BankCard.service;
 
+import ru.example.BankCard.dto.AccountChangeBalanceDto;
 import ru.example.BankCard.dto.AccountDto;
 import ru.example.BankCard.dto.AccountSaveDto;
 import ru.example.BankCard.dto.PersonDto;
@@ -11,4 +12,5 @@ public interface AccountService {
 
     public void save(AccountSaveDto accountSaveDto);
 
+    void changeBalance(AccountChangeBalanceDto accountChangeBalanceDto);
 }

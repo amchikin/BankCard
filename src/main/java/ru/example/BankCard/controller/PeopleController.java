@@ -38,7 +38,7 @@ public class PeopleController {
         return peopleService.getCardsByPersonId(id);
     }
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<HttpStatus> create(@RequestBody @Valid PersonDto personDTO,
                                              BindingResult bindingResult) {
         PeopleErrorResponse.CreateErrors(bindingResult);
