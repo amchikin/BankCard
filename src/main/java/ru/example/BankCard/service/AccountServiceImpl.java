@@ -5,6 +5,7 @@ import ru.example.BankCard.dto.AccountChangeBalanceDto;
 import ru.example.BankCard.dto.AccountDto;
 import ru.example.BankCard.dto.AccountSaveDto;
 import ru.example.BankCard.entity.Account;
+import ru.example.BankCard.exception.AccountChangeBalanceException;
 import ru.example.BankCard.mapper.AccountChangeBalanceMapper;
 import ru.example.BankCard.mapper.AccountChangeBalanceMapperUsingInjectedService;
 import ru.example.BankCard.mapper.AccountMapper;
@@ -19,7 +20,6 @@ import java.util.List;
 @Service
 public class AccountServiceImpl implements AccountService{
     private final AccountsRepository accountsRepository;
-    private final PeopleRepository peopleRepository;
     private final AccountMapper accountMapper;
     private final AccountSaveMapperInjectService accountSaveMapperInjectService;
     private final AccountChangeBalanceMapperUsingInjectedService accountChangeBalanceMapperUsingInjectedService;
@@ -36,13 +36,17 @@ public class AccountServiceImpl implements AccountService{
         accountsRepository.save(accountSaveMapperInjectService.ToModel(accountSaveDto));
     }
     @Override
-    public void changeBalance(AccountChangeBalanceDto accountChangeBalanceDto) {
+    public void changeBalance(AccountChangeBalanceDto accountChangeBalanceDto)
+    throws AccountChangeBalanceException {
         List<Account> accountList = accountsRepository.findByOwner(
                 accountChangeBalanceMapperUsingInjectedService.toModel(accountChangeBalanceDto).getOwner());
         accountList.sort(Comparator.comparing(Account::getIsSalary)); //TODO Как нормально получить зарплатный аккаунт??? Пока сделал хрень, но рабочую)
         BigInteger newBalance = accountList.get(accountList.size()-1).getBalance().
                 add(accountChangeBalanceMapper.toModel(accountChangeBalanceDto).getBalance());
-        accountList.get(accountList.size()-1).setBalance(newBalance);
-        accountsRepository.save(accountList.get(accountList.size()-1));
+        if(newBalance.signum() == 1 || newBalance.signum() == 0 ) {
+            accountList.get(accountList.size() - 1).setBalance(newBalance);
+            accountsRepository.save(accountList.get(accountList.size() - 1));
+        }
+        else throw new AccountChangeBalanceException();
     }
 }

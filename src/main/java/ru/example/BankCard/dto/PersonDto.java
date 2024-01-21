@@ -21,5 +21,4 @@ public class PersonDto extends AbstractDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Data should not be empty")
     private Date birthday;
-
 }

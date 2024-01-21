@@ -27,4 +27,11 @@ public class Advice {
         );
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST); // NOT_FOUND - status 404
     }
+    @ExceptionHandler
+    private ResponseEntity<AccountErrorResponse> handleException(AccountChangeBalanceException e) {
+        AccountErrorResponse response = new AccountErrorResponse(
+                "The balance cannot be negative", System.currentTimeMillis()
+        );
+        return new ResponseEntity<>(response, HttpStatus.NOT_ACCEPTABLE);
+    }
 }

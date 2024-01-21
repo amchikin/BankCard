@@ -16,10 +16,12 @@ import java.util.List;
 @RequestMapping("/accounts")
 public class AccountController {
     private final AccountService accountService;
+
     @GetMapping()
     public List<AccountDto> getAccounts() {
         return accountService.findAll();
     }
+
     @PostMapping()
     public ResponseEntity<HttpStatus> create(@RequestBody @Valid AccountSaveDto accountSaveDto,
                                              BindingResult bindingResult) {
@@ -27,9 +29,9 @@ public class AccountController {
         accountService.save(accountSaveDto);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
     @PostMapping("/change_balance")
-    public ResponseEntity<HttpStatus> changeBalance(@RequestBody @Valid AccountChangeBalanceDto accountChangeBalanceDto,
-                                                    BindingResult bindingResult){
+    public ResponseEntity<HttpStatus> changeBalance(@RequestBody AccountChangeBalanceDto accountChangeBalanceDto) {
         accountService.changeBalance(accountChangeBalanceDto);
         return ResponseEntity.ok(HttpStatus.OK);
     }
