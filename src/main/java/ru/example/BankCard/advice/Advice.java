@@ -8,7 +8,7 @@ import ru.example.BankCard.exception.*;
 public class Advice {
     @ExceptionHandler  // метод который, ловит исключения и возвращает необходимый объект
     private ResponseEntity<PeopleErrorResponse> handleException(PersonNotFoundException e) {
-        PeopleErrorResponse response = new PeopleErrorResponse(
+        PeopleErrorResponse response = new PeopleErrorResponse( // TODO через Builder
                 "Person with current id does not exist in the database", System.currentTimeMillis()
         );
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);

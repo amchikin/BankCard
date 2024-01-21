@@ -27,12 +27,15 @@ public class AccountController {
                                              BindingResult bindingResult) {
         AccountErrorResponse.CreateErrors(bindingResult);
         accountService.save(accountSaveDto);
-        return ResponseEntity.ok(HttpStatus.OK);
+        return ResponseEntity.ok(HttpStatus.OK); //TODO return id
     }
 
-    @PostMapping("/change_balance")
+    /**
+
+     */
+    @PostMapping("/change_balance") // TODO "balance/update"
     public ResponseEntity<HttpStatus> changeBalance(@RequestBody AccountChangeBalanceDto accountChangeBalanceDto) {
         accountService.changeBalance(accountChangeBalanceDto);
-        return ResponseEntity.ok(HttpStatus.OK);
+        return ResponseEntity.ok(HttpStatus.OK); //TODO Тело ответа
     }
 }
