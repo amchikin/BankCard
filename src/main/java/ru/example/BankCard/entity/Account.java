@@ -25,7 +25,7 @@ public class Account extends AbstractEntity {
     @Column(name="issalary")
     private Boolean isSalary;
     @ManyToOne
-    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    @JoinColumn(name = "person_id", referencedColumnName = "id")  // TODO personId rename
     private Person owner;
 }
 

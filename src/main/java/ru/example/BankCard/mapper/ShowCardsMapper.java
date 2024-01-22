@@ -6,11 +6,12 @@ import ru.example.BankCard.dto.ShowCardsDto;
 import ru.example.BankCard.entity.Person;
 @Mapper(componentModel = "spring", uses = {AccountMapper.class})
 public interface ShowCardsMapper {
-    Person map(ShowCardsDto source);
-    @Mapping(target = "fio",  source = ".", qualifiedByName = "fullName")
-    ShowCardsDto map(Person destination);
+    Person map(ShowCardsDto showCardsDto);
+    @Mapping(target = "fio",  source = "person", qualifiedByName = "fullName")
+    ShowCardsDto map(Person person);
     @Named("fullName")
-    default String fullName(Person destination) {
-        return destination.getName() + " " + destination.getSurname();
+    default String fullName(Person person) {
+        return String.format("%s %s", person.getName(), person.getSurname());
     }
 }
+

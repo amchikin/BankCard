@@ -7,6 +7,6 @@ import ru.example.BankCard.entity.Account;
 public interface AccountSaveMapper {
 
     @Mapping(target = "owner.id", source = "person_id")
-    Account map(AccountSaveDto source);
-    AccountSaveDto map(Account destination);
+    Account map(AccountSaveDto accountSaveDto);
+    AccountSaveDto map(Account account);
 }
