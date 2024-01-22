@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.example.BankCard.dto.ShowCardsResponseDto;
+import ru.example.BankCard.dto.ShowCardsDto;
 import ru.example.BankCard.service.PeopleService;
 import ru.example.BankCard.dto.PersonDto;
 import ru.example.BankCard.exception.PeopleErrorResponse;
@@ -26,7 +26,7 @@ public class PeopleController {
     }
     // API 2 по ТЗ. Выводит инфо о всех картах человека по id (сортирует по возрастанию баланса).
     @GetMapping("/{id}/cards")
-    public ShowCardsResponseDto showCards(@PathVariable("id") int id) {
+    public ShowCardsDto showCards(@PathVariable("id") int id) {
         return peopleService.getCardsByPersonId(id);
     }
     @PostMapping()
