@@ -6,7 +6,7 @@ import ru.example.BankCard.entity.Account;
 @Mapper(componentModel = "spring")
 public interface AccountChangeBalanceMapper {
     @Mapping(target = "balance", source = "value")
-    @Mapping(target = "owner.id", source = "person_id")
+    @Mapping(target = "owner.id", source = "personId")
     Account map(AccountChangeBalanceDto accountChangeBalanceDto);
     AccountChangeBalanceDto map(Account account);
 }

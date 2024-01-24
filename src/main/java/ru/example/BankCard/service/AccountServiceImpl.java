@@ -31,8 +31,8 @@ public class AccountServiceImpl implements AccountService{
         return listAccountDTO;
     }
     @Override
-    public void save(AccountSaveDto accountSaveDto) {
-        accountsRepository.save(accountSaveMapper.map(accountSaveDto));
+    public AccountSaveDto save(AccountSaveDto accountSaveDto) {
+        return accountSaveMapper.map(accountsRepository.save(accountSaveMapper.map(accountSaveDto)));
     }
     @Override
     public void changeBalance(AccountChangeBalanceDto accountChangeBalanceDto)

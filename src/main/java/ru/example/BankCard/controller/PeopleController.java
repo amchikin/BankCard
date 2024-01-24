@@ -14,20 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/people")
 public class PeopleController {
-    private final PeopleService peopleService; // Поле внедряется через конструктор авто средствами Lombok
+    private final PeopleService peopleService;
     @GetMapping()
     public List<PersonDto> getPeople() {
         return peopleService.findAll();
-    }
-    // API 1 по ТЗ: Человек по id. Если нет нашёл - читаемое исключение.
-    @GetMapping("/{id}")
-    public PersonDto getPerson(@PathVariable("id") int id) {
-        return peopleService.findOne(id);
-    }
-    // API 2 по ТЗ. Выводит инфо о всех картах человека по id (сортирует по возрастанию баланса).
-    @GetMapping("/{id}/cards")
-    public ShowCardsDto showCards(@PathVariable("id") int id) {
-        return peopleService.getCardsByPersonId(id);
     }
     @PostMapping()
     public ResponseEntity<HttpStatus> create(@RequestBody @Valid PersonDto personDTO,
@@ -35,5 +25,20 @@ public class PeopleController {
         PeopleErrorResponse.CreateErrors(bindingResult);
         peopleService.save(personDTO);
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+     /**
+     * Get person by id. If not found, a readable exception.
+     */
+    @GetMapping("/{id}")
+    public PersonDto getPerson(@PathVariable("id") int id) {
+        return peopleService.findOne(id);
+    }
+
+    /**
+     *  Displays information about all cards of a person by id (sorts by ascending balance).
+     */
+    @GetMapping("/{id}/cards")
+    public ShowCardsDto showCards(@PathVariable("id") int id) {
+        return peopleService.getCardsByPersonId(id);
     }
 }

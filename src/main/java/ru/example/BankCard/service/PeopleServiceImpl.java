@@ -38,7 +38,7 @@ public class PeopleServiceImpl implements PeopleService {
        return personMapper.map(peopleRepository.save(personMapper.map(personDTO)));
     }
     @Override
-    public ShowCardsDto getCardsByPersonId(int id) { // TODO
+    public ShowCardsDto getCardsByPersonId(int id) { // TODO. Забыл про что это. Спросить у Богдана: что ему тут не понравилось
         Optional<Person> person = peopleRepository.findById(id);
         if(person.isEmpty())
             return null;

@@ -5,6 +5,6 @@ import java.math.BigInteger;
 @Getter
 @Setter
 public class AccountChangeBalanceDto extends AbstractDto {
-    private Integer person_id;
+    private Integer personId;
     private BigInteger value;
 }

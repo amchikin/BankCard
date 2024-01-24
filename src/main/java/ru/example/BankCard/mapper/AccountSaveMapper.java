@@ -6,7 +6,7 @@ import ru.example.BankCard.entity.Account;
 @Mapper(componentModel = "spring")
 public interface AccountSaveMapper {
 
-    @Mapping(target = "owner.id", source = "person_id")
+    @Mapping(target = "owner.id", source = "personId")
     Account map(AccountSaveDto accountSaveDto);
     AccountSaveDto map(Account account);
 }

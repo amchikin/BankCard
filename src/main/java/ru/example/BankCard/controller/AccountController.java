@@ -21,7 +21,6 @@ public class AccountController {
     public List<AccountDto> getAccounts() {
         return accountService.findAll();
     }
-
     @PostMapping()
     public ResponseEntity<HttpStatus> create(@RequestBody @Valid AccountSaveDto accountSaveDto,
                                              BindingResult bindingResult) {
@@ -31,9 +30,9 @@ public class AccountController {
     }
 
     /**
-
+    * Update salary card by personId. If the balance becomes negative, then a readable exception
      */
-    @PostMapping("/change_balance") // TODO "balance/update"
+    @PostMapping("/update")
     public ResponseEntity<HttpStatus> changeBalance(@RequestBody AccountChangeBalanceDto accountChangeBalanceDto) {
         accountService.changeBalance(accountChangeBalanceDto);
         return ResponseEntity.ok(HttpStatus.OK); //TODO Тело ответа

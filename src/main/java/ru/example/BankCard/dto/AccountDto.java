@@ -10,7 +10,7 @@ import java.math.BigInteger;
 public class AccountDto extends AbstractDto {
     @NotEmpty(message = "Поле номера карты не должно быть пустым")
     @Size(min = 16, max = 16, message = "Размер номера карты ровно 16")
-    private String card_number;
+    private String cardNumber;
     @Min(value = 0, message = "Баланс не может быть отрицательным")
     private BigInteger balance;
 }

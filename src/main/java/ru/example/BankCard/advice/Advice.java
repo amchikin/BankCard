@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.example.BankCard.exception.*;
 @ControllerAdvice
-public class Advice {
+public class Advice { //TODO rename packet & class. How? Ask from Bogdan
     @ExceptionHandler  // метод который, ловит исключения и возвращает необходимый объект
     private ResponseEntity<PeopleErrorResponse> handleException(PersonNotFoundException e) {
         PeopleErrorResponse response = new PeopleErrorResponse( // TODO через Builder
