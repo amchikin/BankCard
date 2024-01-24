@@ -8,6 +8,7 @@ import java.math.BigInteger;
 @Getter
 @Setter
 public class AccountSaveDto extends AbstractDto {
+    private Integer id;
     @NotEmpty(message = "Поле номера карты не должно быть пустым")
     @Size(min = 16, max = 16, message = "Размер номера карты ровно 16")
     private String cardNumber;

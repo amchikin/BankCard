@@ -1,8 +1,6 @@
 package ru.example.BankCard.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.example.BankCard.dto.AccountChangeBalanceDto;
@@ -22,19 +20,19 @@ public class AccountController {
         return accountService.findAll();
     }
     @PostMapping()
-    public ResponseEntity<HttpStatus> create(@RequestBody @Valid AccountSaveDto accountSaveDto,
+    public String create(@RequestBody @Valid AccountSaveDto accountSaveDto,
                                              BindingResult bindingResult) {
         AccountErrorResponse.CreateErrors(bindingResult);
-        accountService.save(accountSaveDto);
-        return ResponseEntity.ok(HttpStatus.OK); //TODO return id
+        accountSaveDto = accountService.save(accountSaveDto);
+        return String.format("New account (bank card) with id %d has been created.", accountSaveDto.getId());
     }
 
     /**
     * Update salary card by personId. If the balance becomes negative, then a readable exception
      */
     @PostMapping("/update")
-    public ResponseEntity<HttpStatus> changeBalance(@RequestBody AccountChangeBalanceDto accountChangeBalanceDto) {
+    public String changeBalance(@RequestBody AccountChangeBalanceDto accountChangeBalanceDto) {
         accountService.changeBalance(accountChangeBalanceDto);
-        return ResponseEntity.ok(HttpStatus.OK); //TODO Тело ответа
+        return String.format("The salary card of a person with id %d has been changed to %d", accountChangeBalanceDto.getPersonId(), accountChangeBalanceDto.getValue());
     }
 }

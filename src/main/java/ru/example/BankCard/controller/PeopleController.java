@@ -1,10 +1,9 @@
 package ru.example.BankCard.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.example.BankCard.dto.PersonSaveDto;
 import ru.example.BankCard.dto.ShowCardsDto;
 import ru.example.BankCard.service.PeopleService;
 import ru.example.BankCard.dto.PersonDto;
@@ -20,11 +19,11 @@ public class PeopleController {
         return peopleService.findAll();
     }
     @PostMapping()
-    public ResponseEntity<HttpStatus> create(@RequestBody @Valid PersonDto personDTO,
+    public String create(@RequestBody @Valid PersonSaveDto personSaveDto,
                                              BindingResult bindingResult) {
-        PeopleErrorResponse.CreateErrors(bindingResult);
-        peopleService.save(personDTO);
-        return ResponseEntity.ok(HttpStatus.OK);
+        PeopleErrorResponse.CreateErrors(bindingResult); // TODO Выкинуть bindingResult
+        personSaveDto = peopleService.save(personSaveDto);
+        return String.format("Person with id %d has been created.", personSaveDto.getId());
     }
      /**
      * Get person by id. If not found, a readable exception.
