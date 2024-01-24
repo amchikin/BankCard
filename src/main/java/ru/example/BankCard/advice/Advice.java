@@ -4,34 +4,35 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.example.BankCard.exception.*;
+
 @ControllerAdvice
 public class Advice { //TODO rename packet & class. How? Ask from Bogdan
     @ExceptionHandler  // метод который, ловит исключения и возвращает необходимый объект
     private ResponseEntity<PeopleErrorResponse> handleException(PersonNotFoundException e) {
-        PeopleErrorResponse response = new PeopleErrorResponse( // TODO через Builder
-                "Person with current id does not exist in the database", System.currentTimeMillis()
-        );
+        PeopleErrorResponse response = PeopleErrorResponse.builder()
+                .message("Person with current id does not exist in the database")
+                .timestamp(System.currentTimeMillis()).build();
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
     @ExceptionHandler
     private ResponseEntity<PeopleErrorResponse> handleException(PersonNotCreateException e) {
-        PeopleErrorResponse response = new PeopleErrorResponse(  //
-                e.getMessage(), System.currentTimeMillis()
-        );
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST); // NOT_FOUND - status 404
+        PeopleErrorResponse response = PeopleErrorResponse.builder()
+                .message(e.getMessage())
+                .timestamp(System.currentTimeMillis()).build();
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler
     private ResponseEntity<AccountErrorResponse> handleException(AccountNotCreateException e) {
-        AccountErrorResponse response = new AccountErrorResponse(  //
-                e.getMessage(), System.currentTimeMillis()
-        );
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST); // NOT_FOUND - status 404
+        AccountErrorResponse response = AccountErrorResponse.builder()
+                .message(e.getMessage())
+                .timestamp(System.currentTimeMillis()).build();
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler
     private ResponseEntity<AccountErrorResponse> handleException(AccountChangeBalanceException e) {
-        AccountErrorResponse response = new AccountErrorResponse(
-                "The balance cannot be negative", System.currentTimeMillis()
-        );
+        AccountErrorResponse response = AccountErrorResponse.builder()
+                .message("The balance cannot be negative")
+                .timestamp(System.currentTimeMillis()).build();
         return new ResponseEntity<>(response, HttpStatus.NOT_ACCEPTABLE);
     }
 }

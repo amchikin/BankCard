@@ -1,5 +1,6 @@
 package ru.example.BankCard.exception;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.validation.BindingResult;
@@ -8,12 +9,13 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
+@Builder
 public class  AccountErrorResponse {
     private String message;
     private long timestamp;
     public static void CreateErrors(BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            StringBuilder errorMsg = new StringBuilder();
+            StringBuilder errorMsg = new StringBuilder(); // TODO Спросить: это мы на Builder не меняем же?
             List<FieldError> errors = bindingResult.getFieldErrors();
             for(FieldError error: errors){
                 errorMsg.append(error.getField())

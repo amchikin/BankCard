@@ -1,5 +1,6 @@
 package ru.example.BankCard.exception;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.validation.BindingResult;
@@ -8,6 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
+@Builder
 public class  PeopleErrorResponse {
     private String message;
     private long timestamp;

@@ -14,7 +14,6 @@ import java.util.List;
 @RequestMapping("/accounts")
 public class AccountController {
     private final AccountService accountService;
-
     @GetMapping()
     public List<AccountDto> getAccounts() {
         return accountService.findAll();
@@ -26,7 +25,6 @@ public class AccountController {
         accountSaveDto = accountService.save(accountSaveDto);
         return String.format("New account (bank card) with id %d has been created.", accountSaveDto.getId());
     }
-
     /**
     * Update salary card by personId. If the balance becomes negative, then a readable exception
      */
