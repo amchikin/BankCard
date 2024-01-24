@@ -1,3 +1,4 @@
 package ru.example.BankCard.exception;
-public class AccountChangeBalanceException extends RuntimeException{
+
+public class AccountChangeBalanceException extends RuntimeException {
 }

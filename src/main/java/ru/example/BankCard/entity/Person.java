@@ -1,4 +1,5 @@
 package ru.example.BankCard.entity;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -6,12 +7,14 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.List;
+
 @Getter
 @Setter
 @Entity
-@Table(name="Person")
+@Table(name = "Person")
 public class Person extends AbstractEntity {
     @Id
     @Column(name = "id")
@@ -25,7 +28,7 @@ public class Person extends AbstractEntity {
     @NotEmpty(message = "Name should not be empty")
     @Column(name = "name")
     private String name;
-    @Column(name="birthday")
+    @Column(name = "birthday")
     @Temporal(TemporalType.DATE) // TODO можно ли без неё
     @DateTimeFormat(pattern = "yyyy-MM-dd") // TODO Add Spring Validator
     @NotNull(message = "Data should not be empty")

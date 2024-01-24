@@ -1,4 +1,5 @@
 package ru.example.BankCard.dto;
+
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotEmpty;
@@ -7,7 +8,9 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
+
 @Getter
 @Setter
 public class PersonDto extends AbstractDto {
