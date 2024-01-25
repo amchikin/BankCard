@@ -1,17 +1,13 @@
 package ru.example.BankCard.exception;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
 import java.util.List;
 
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
+@AllArgsConstructor //TODO проверить без него
 @Builder
 public class AccountErrorResponse {
     private String message;

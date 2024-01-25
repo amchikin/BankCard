@@ -12,8 +12,8 @@ import ru.example.BankCard.exception.PeopleErrorResponse;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/people")
 public class PeopleController {
     private final PeopleService peopleService;

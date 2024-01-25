@@ -3,14 +3,12 @@ package ru.example.BankCard.dto;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.math.BigInteger;
 
-@Getter
-@Setter
-public class AccountSaveDto extends AbstractDto {
+@Data
+public class AccountSaveDto {
     private Integer id;
     @NotEmpty(message = "Поле номера карты не должно быть пустым")
     @Size(min = 16, max = 16, message = "Размер номера карты ровно 16")

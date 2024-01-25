@@ -12,7 +12,6 @@ import ru.example.BankCard.service.AccountService;
 
 import java.util.List;
 
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/accounts")
@@ -25,8 +24,7 @@ public class AccountController {
     }
 
     @PostMapping()
-    public String create(@RequestBody @Valid AccountSaveDto accountSaveDto,
-                         BindingResult bindingResult) {
+    public String create(@RequestBody @Valid AccountSaveDto accountSaveDto, BindingResult bindingResult) {
         AccountErrorResponse.CreateErrors(bindingResult);
         accountSaveDto = accountService.save(accountSaveDto);
         return String.format("New account (bank card) with id %d has been created.", accountSaveDto.getId());

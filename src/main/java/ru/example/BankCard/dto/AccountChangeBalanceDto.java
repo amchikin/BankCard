@@ -1,13 +1,11 @@
 package ru.example.BankCard.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.math.BigInteger;
 
-@Getter
-@Setter
-public class AccountChangeBalanceDto extends AbstractDto {
+@Data
+public class AccountChangeBalanceDto {
     private Integer personId;
     private BigInteger value;
 }

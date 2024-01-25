@@ -4,16 +4,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.math.BigInteger;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "account")
-public class Account extends AbstractEntity {
+public class Account {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
