@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
     private final AccountsRepository accountsRepository;
     private final AccountMapper accountMapper;

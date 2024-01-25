@@ -12,7 +12,7 @@ import java.math.BigInteger;
 @Getter
 @Setter
 @Entity
-@Table(name = "Account")
+@Table(name = "account")
 public class Account extends AbstractEntity {
     @Id
     @Column(name = "id")

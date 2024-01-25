@@ -12,8 +12,9 @@ import ru.example.BankCard.service.AccountService;
 
 import java.util.List;
 
-@RequiredArgsConstructor
+
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/accounts")
 public class AccountController {
     private final AccountService accountService;

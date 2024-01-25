@@ -19,8 +19,8 @@ import ru.example.BankCard.exception.PersonNotFoundException;
 
 import java.util.*;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class PeopleServiceImpl implements PeopleService {
     private final PeopleRepository peopleRepository;
     private final PersonMapper personMapper;
