@@ -27,7 +27,7 @@ public class AccountServiceImpl implements AccountService {
     private final AccountChangeBalanceMapper accountChangeBalanceMapper;
 
     @Override
-    public List<AccountDto> findAll() {  // TODO Подумать над лучшей реализацией
+    public List<AccountDto> getAccountList() {  // TODO Подумать над лучшей реализацией
         List<AccountDto> listAccountDTO = new ArrayList<>();
         List<Account> listAccount = accountsRepository.findAll();
         listAccount.forEach(element -> listAccountDTO.add(accountMapper.map(element)));
@@ -35,12 +35,12 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountSaveDto save(AccountSaveDto accountSaveDto) {
+    public AccountSaveDto saveAccountRqDto(AccountSaveDto accountSaveDto) {
         return accountSaveMapper.map(accountsRepository.save(accountSaveMapper.map(accountSaveDto)));
     }
 
     @Override
-    public void changeBalance(AccountChangeBalanceDto accountChangeBalanceDto)
+    public void changeAccountSalaryBalanceRqDto(AccountChangeBalanceDto accountChangeBalanceDto)
             throws AccountChangeBalanceException {
         List<Account> accountList = accountsRepository.findByOwner(
                 accountChangeBalanceMapper.map(accountChangeBalanceDto).getOwner());

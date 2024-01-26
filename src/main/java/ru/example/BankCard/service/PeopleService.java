@@ -7,11 +7,11 @@ import ru.example.BankCard.dto.ShowCardsDto;
 import java.util.List;
 
 public interface PeopleService {
-    List<PersonDto> findAll();
+    List<PersonDto> getPersonList();
 
-    PersonDto findOne(int id);
+    PersonDto getPersonById(int id);
 
-    PersonSaveDto save(PersonSaveDto personSaveDto);
+    PersonSaveDto savePersonRqDto(PersonSaveDto personSaveDto);
 
     ShowCardsDto getCardsByPersonId(int id);
 }

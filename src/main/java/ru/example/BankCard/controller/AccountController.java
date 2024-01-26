@@ -19,14 +19,14 @@ public class AccountController {
     private final AccountService accountService;
 
     @GetMapping()
-    public List<AccountDto> getAccounts() {
-        return accountService.findAll();
+    public List<AccountDto> showAllAccounts() {
+        return accountService.getAccountList();
     }
 
     @PostMapping()
-    public String create(@RequestBody @Valid AccountSaveDto accountSaveDto, BindingResult bindingResult) {
+    public String createAccount(@RequestBody @Valid AccountSaveDto accountSaveDto, BindingResult bindingResult) {
         AccountErrorResponse.CreateErrors(bindingResult);
-        accountSaveDto = accountService.save(accountSaveDto);
+        accountSaveDto = accountService.saveAccountRqDto(accountSaveDto);
         return String.format("New account (bank card) with id %d has been created.", accountSaveDto.getId());
     }
 
@@ -34,8 +34,9 @@ public class AccountController {
      * Update salary card by personId. If the balance becomes negative, then a readable exception
      */
     @PostMapping("/update")
-    public String changeBalance(@RequestBody AccountChangeBalanceDto accountChangeBalanceDto) {
-        accountService.changeBalance(accountChangeBalanceDto);
-        return String.format("The salary card of a person with id %d has been changed to %d", accountChangeBalanceDto.getPersonId(), accountChangeBalanceDto.getValue());
+    public String updateSalaryBalance(@RequestBody AccountChangeBalanceDto accountChangeBalanceDto) {
+        accountService.changeAccountSalaryBalanceRqDto(accountChangeBalanceDto);
+        return String.format("The salary card of a person with id %d has been changed to %d",
+                accountChangeBalanceDto.getPersonId(), accountChangeBalanceDto.getValue());
     }
 }

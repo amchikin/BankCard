@@ -7,9 +7,9 @@ import ru.example.BankCard.dto.AccountSaveDto;
 import java.util.List;
 
 public interface AccountService {
-    List<AccountDto> findAll();
+    List<AccountDto> getAccountList();
 
-    AccountSaveDto save(AccountSaveDto accountSaveDto);
+    AccountSaveDto saveAccountRqDto(AccountSaveDto accountSaveDto);
 
-    void changeBalance(AccountChangeBalanceDto accountChangeBalanceDto);
+    void changeAccountSalaryBalanceRqDto(AccountChangeBalanceDto accountChangeBalanceDto); // TODO уместен ли void
 }

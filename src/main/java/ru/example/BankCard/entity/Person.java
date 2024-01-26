@@ -27,7 +27,6 @@ public class Person {
     @Column(name = "name")
     private String name;
     @Column(name = "birthday")
-    @Temporal(TemporalType.DATE) // TODO можно ли без неё
     @DateTimeFormat(pattern = "yyyy-MM-dd") // TODO Add Spring Validator
     @NotNull(message = "Data should not be empty")
     private Date birthday;

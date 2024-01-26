@@ -28,7 +28,7 @@ public class PeopleServiceImpl implements PeopleService {
     private final ShowCardsMapper showCardsMapper;
 
     @Override
-    public List<PersonDto> findAll() {  // TODO Подумать над лучшей реализацией. Через Stream
+    public List<PersonDto> getPersonList() {  // TODO Подумать над лучшей реализацией. Через Stream
         List<PersonDto> listPersonDTO = new ArrayList<>();
         List<Person> listPerson = peopleRepository.findAll();
         listPerson.forEach(element -> listPersonDTO.add(personMapper.map(element)));
@@ -36,13 +36,13 @@ public class PeopleServiceImpl implements PeopleService {
     }
 
     @Override
-    public PersonDto findOne(int id) {
+    public PersonDto getPersonById(int id) {
         Optional<Person> foundPerson = peopleRepository.findById(id);
         return personMapper.map(foundPerson.orElseThrow(PersonNotFoundException::new));
     }
 
     @Override
-    public PersonSaveDto save(PersonSaveDto personSaveDto) {
+    public PersonSaveDto savePersonRqDto(PersonSaveDto personSaveDto) {
         return personSaveMapper.map(peopleRepository.save(personSaveMapper.map(personSaveDto)));
     }
 
