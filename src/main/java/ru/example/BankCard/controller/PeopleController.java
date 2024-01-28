@@ -2,13 +2,11 @@ package ru.example.BankCard.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.example.BankCard.dto.PersonSaveDto;
 import ru.example.BankCard.dto.ShowCardsDto;
 import ru.example.BankCard.service.PeopleService;
 import ru.example.BankCard.dto.PersonDto;
-import ru.example.BankCard.exception.PeopleErrorResponse;
 
 import java.util.List;
 
@@ -24,9 +22,7 @@ public class PeopleController {
     }
 
     @PostMapping()
-    public String createPerson(@RequestBody @Valid PersonSaveDto personSaveDto,
-                         BindingResult bindingResult) {
-        PeopleErrorResponse.CreateErrors(bindingResult); // TODO Выкинуть bindingResult
+    public String createPerson(@RequestBody @Valid PersonSaveDto personSaveDto) {
         personSaveDto = peopleService.savePersonRqDto(personSaveDto);
         return String.format("Person with id %d has been created.", personSaveDto.getId());
     }

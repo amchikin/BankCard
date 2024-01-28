@@ -15,7 +15,7 @@ import ru.example.BankCard.mapper.PersonSaveMapper;
 import ru.example.BankCard.mapper.ShowCardsMapper;
 import ru.example.BankCard.repository.PeopleRepository;
 import ru.example.BankCard.entity.Person;
-import ru.example.BankCard.exception.PersonNotFoundException;
+import ru.example.BankCard.exception.NotFoundException;
 
 import java.util.*;
 
@@ -38,7 +38,7 @@ public class PeopleServiceImpl implements PeopleService {
     @Override
     public PersonDto getPersonById(int id) {
         Optional<Person> foundPerson = peopleRepository.findById(id);
-        return personMapper.map(foundPerson.orElseThrow(PersonNotFoundException::new));
+        return personMapper.map(foundPerson.orElseThrow(()-> new NotFoundException(String.format("Person with id %d does not exist in the database.", id))));
     }
 
     @Override

@@ -50,6 +50,6 @@ public class AccountServiceImpl implements AccountService {
         if (newBalance.signum() == 1 || newBalance.signum() == 0) {
             accountList.get(accountList.size() - 1).setBalance(newBalance);
             accountsRepository.save(accountList.get(accountList.size() - 1));
-        } else throw new AccountChangeBalanceException();
+        } else throw new AccountChangeBalanceException("The balance cannot be negative");
     }
 }
