@@ -27,6 +27,7 @@ public class Person {
     @Column(name = "name")
     private String name;
     @Column(name = "birthday")
+    @Temporal(TemporalType.DATE) // TODO Без неё в Postman формат даты неверен
     @DateTimeFormat(pattern = "yyyy-MM-dd") // TODO Add Spring Validator
     @NotNull(message = "Data should not be empty")
     private Date birthday;
