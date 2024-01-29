@@ -9,9 +9,9 @@ import java.util.List;
 public interface PeopleService {
     List<PersonDto> getPersonList();
 
-    PersonDto getPersonById(int id);
+    PersonDto getPersonByIdOrThrow(Integer id);
 
     PersonSaveDto savePersonRqDto(PersonSaveDto personSaveDto);
 
-    ShowCardsDto getCardsByPersonId(int id);
+    ShowCardsDto getCardsByPersonId(Integer id);
 }

@@ -18,6 +18,7 @@ import ru.example.BankCard.entity.Person;
 import ru.example.BankCard.exception.NotFoundException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,32 +29,33 @@ public class PeopleServiceImpl implements PeopleService {
     private final ShowCardsMapper showCardsMapper;
 
     @Override
-    public List<PersonDto> getPersonList() {  // TODO Подумать над лучшей реализацией. Через Stream
-        List<PersonDto> listPersonDTO = new ArrayList<>();
-        List<Person> listPerson = peopleRepository.findAll();
-        listPerson.forEach(element -> listPersonDTO.add(personMapper.map(element)));
-        return listPersonDTO;
+    public List<PersonDto> getPersonList() {
+        return peopleRepository.findAll().stream().map(personMapper::map).collect(Collectors.toList());
     }
 
     @Override
-    public PersonDto getPersonById(int id) {
-        Optional<Person> foundPerson = peopleRepository.findById(id);
-        return personMapper.map(foundPerson.orElseThrow(()-> new NotFoundException(String.format("Person with id %d does not exist in the database.", id))));
+    public PersonDto getPersonByIdOrThrow(Integer id) {
+        return personMapper.map(peopleRepository.findById(id).
+                orElseThrow(() ->
+                        new NotFoundException(
+                                String.format("Person with id %d does not exist in the database.", id))));
     }
 
     @Override
     public PersonSaveDto savePersonRqDto(PersonSaveDto personSaveDto) {
-        return personSaveMapper.map(peopleRepository.save(personSaveMapper.map(personSaveDto)));
+        return personSaveMapper.map(peopleRepository.
+                save(personSaveMapper.map(personSaveDto)));
     }
 
     @Override
-    public ShowCardsDto getCardsByPersonId(int id) { // TODO. Забыл про что это. Спросить у Богдана: что ему тут не понравилось
-        Optional<Person> person = peopleRepository.findById(id);
-        if (person.isEmpty())
-            return null;
-        List<Account> accountList = person.get().getAccounts();
-        accountList.sort(Comparator.comparing(Account::getBalance));
-        person.get().setAccounts(accountList);
-        return showCardsMapper.map(person.get());
+    public ShowCardsDto getCardsByPersonId(Integer id) {
+        Person person = peopleRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(
+                        String.format("Person with id %d does not exist in the database.", id)));
+        if (person.getAccounts() != null) {
+            person.setAccounts(person.getAccounts().stream().sorted(Comparator.comparing(Account::getBalance)).collect(Collectors.toList()));
+            return showCardsMapper.map(person);
+        }
+        return null;
     }
 }

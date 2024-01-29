@@ -14,9 +14,8 @@ import ru.example.BankCard.mapper.AccountSaveMapper;
 import ru.example.BankCard.repository.AccountsRepository;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,11 +26,8 @@ public class AccountServiceImpl implements AccountService {
     private final AccountChangeBalanceMapper accountChangeBalanceMapper;
 
     @Override
-    public List<AccountDto> getAccountList() {  // TODO Подумать над лучшей реализацией
-        List<AccountDto> listAccountDTO = new ArrayList<>();
-        List<Account> listAccount = accountsRepository.findAll();
-        listAccount.forEach(element -> listAccountDTO.add(accountMapper.map(element)));
-        return listAccountDTO;
+    public List<AccountDto> getAccountList() {
+        return accountsRepository.findAll().stream().map(accountMapper::map).collect(Collectors.toList());
     }
 
     @Override
@@ -42,14 +38,11 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void changeAccountSalaryBalanceRqDto(AccountChangeBalanceDto accountChangeBalanceDto)
             throws AccountChangeBalanceException {
-        List<Account> accountList = accountsRepository.findByOwner(
-                accountChangeBalanceMapper.map(accountChangeBalanceDto).getOwner());
-        accountList.sort(Comparator.comparing(Account::getIsSalary)); //TODO Как нормально получить зарплатный аккаунт??? Пока сделал хрень, но рабочую)
-        BigInteger newBalance = accountList.get(accountList.size() - 1).getBalance().
-                add(accountChangeBalanceMapper.map(accountChangeBalanceDto).getBalance());
+        Account account = accountsRepository.findAccountsByOwnerAndAndIsSalaryTrue(accountChangeBalanceMapper.map(accountChangeBalanceDto).getOwner());
+        BigInteger newBalance = account.getBalance().add(accountChangeBalanceMapper.map(accountChangeBalanceDto).getBalance());
         if (newBalance.signum() == 1 || newBalance.signum() == 0) {
-            accountList.get(accountList.size() - 1).setBalance(newBalance);
-            accountsRepository.save(accountList.get(accountList.size() - 1));
+            account.setBalance(newBalance);
+            accountsRepository.save(account);
         } else throw new AccountChangeBalanceException("The balance cannot be negative");
     }
 }

@@ -32,7 +32,7 @@ public class PeopleController {
      */
     @GetMapping("/{id}")
     public PersonDto showPerson(@PathVariable("id") Integer id) {
-        return peopleService.getPersonById(id);
+        return peopleService.getPersonByIdOrThrow(id);
     }
 
     /**
