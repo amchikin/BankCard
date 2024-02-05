@@ -6,6 +6,8 @@ import java.util.List;
 
 @Data
 public class ShowCardsDto {
+
     private String fio;
+
     private List<AccountDto> accounts;
 }
