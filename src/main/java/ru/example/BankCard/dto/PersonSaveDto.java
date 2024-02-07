@@ -10,11 +10,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder // TODO Почему @Data и @Builder вместе быть не могут - разобраться
+@Builder
 public class PersonSaveDto {
 
     private Integer id;

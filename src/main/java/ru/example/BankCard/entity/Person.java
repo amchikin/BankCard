@@ -11,11 +11,10 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder // TODO Почему @Data и @Builder вместе быть не могут - разобраться
+@Builder
 @Entity
 @Table(name = "person")
 public class Person {
@@ -36,7 +35,6 @@ public class Person {
     private String name;
 
     @Column(name = "birthday")
-    @Temporal(TemporalType.DATE) // TODO Без неё в Postman формат даты неверен
     @DateTimeFormat(pattern = "yyyy-MM-dd") // TODO Add Spring Validator
     @NotNull(message = "Data should not be empty")
     private LocalDate birthday;

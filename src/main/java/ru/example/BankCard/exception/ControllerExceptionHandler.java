@@ -13,7 +13,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class ControllerExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     private ResponseEntity<ErrorMessage> resourceNotFoundException(NotFoundException ex) {
-        final ErrorMessage message = new ErrorMessage(
+        ErrorMessage message = new ErrorMessage(
                 NOT_FOUND.value(),
                 new Date(),
                 ex.getMessage()
@@ -34,7 +34,7 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(AccountChangeBalanceException.class)
     private ResponseEntity<ErrorMessage> resourceAccountChangeBalanceException(AccountChangeBalanceException ex) {
-        final ErrorMessage message = new ErrorMessage(
+        ErrorMessage message = new ErrorMessage(
                 NOT_FOUND.value(),
                 new Date(),
                 ex.getMessage()
