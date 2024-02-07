@@ -20,18 +20,18 @@ public class Account {
 
     @NotEmpty(message = "Поле номера карты не должно быть пустым")
     @Size(min = 16, max = 16, message = "Размер номера карты ровно 16")
-    @Column(name = "cardnumber")
+    @Column(name = "card_number")
     private String cardNumber;
 
     @Min(value = 0, message = "Баланс не может быть отрицательным")
     @Column(name = "balance")
     private BigInteger balance;
 
-    @Column(name = "issalary")
+    @Column(name = "salary_status")
     private Boolean isSalary;
 
     @ManyToOne
-    @JoinColumn(name = "personid", referencedColumnName = "id")
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person owner;
 }
 

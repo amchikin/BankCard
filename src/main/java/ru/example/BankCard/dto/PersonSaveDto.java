@@ -1,15 +1,20 @@
 package ru.example.BankCard.dto;
 
+import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Date;
 
-@Data
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder // TODO Почему @Data и @Builder вместе быть не могут - разобраться
 public class PersonSaveDto {
 
     private Integer id;
