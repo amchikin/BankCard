@@ -28,8 +28,7 @@ public class PeopleServiceImpl implements PeopleService {
     private final PersonSaveMapper personSaveMapper;
     private final ShowCardsMapper showCardsMapper;
 
-    @Override
-    public List<PersonDto> getPersonList() {
+    @Override public List<PersonDto> getPersonDtoList() {
         return peopleRepository.findAll().stream().map(personMapper::map).collect(Collectors.toList());
     }
 

@@ -2,6 +2,8 @@ package ru.example.BankCard.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.example.BankCard.dto.AccountChangeBalanceDto;
 import ru.example.BankCard.dto.AccountDto;
@@ -22,10 +24,14 @@ public class AccountController {
     }
 
     @PostMapping()
-    public String createAccount(@RequestBody @Valid AccountSaveDto accountSaveDto) {
-        accountSaveDto = accountService.saveAccountRqDto(accountSaveDto);
-        return String.format("New account (bank card) with id %d has been created.", accountSaveDto.getId());
+    public ResponseEntity<AccountSaveDto> createAccount(@RequestBody @Valid AccountSaveDto accountSaveDto) {
+        return new ResponseEntity<>(accountService.saveAccountRqDto(accountSaveDto), HttpStatus.CREATED);
     }
+//    @PostMapping()
+//    public String createAccount(@RequestBody @Valid AccountSaveDto accountSaveDto) {
+//        accountSaveDto = accountService.saveAccountRqDto(accountSaveDto);
+//        return String.format("New account (bank card) with id %d has been created.", accountSaveDto.getId());
+//    }
 
     /**
      * Update salary card by personId. If the balance becomes negative, then a readable exception

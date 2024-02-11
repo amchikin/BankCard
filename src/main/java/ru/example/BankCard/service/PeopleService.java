@@ -7,7 +7,7 @@ import ru.example.BankCard.dto.ShowCardsDto;
 import java.util.List;
 
 public interface PeopleService {
-    List<PersonDto> getPersonList();
+    List<PersonDto> getPersonDtoList();
 
     PersonDto getPersonByIdOrThrow(Integer id);
 
