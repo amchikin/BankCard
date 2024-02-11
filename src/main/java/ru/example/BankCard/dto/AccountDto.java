@@ -3,11 +3,17 @@ package ru.example.BankCard.dto;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigInteger;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class AccountDto {
 
     @NotEmpty(message = "Поле номера карты не должно быть пустым")
