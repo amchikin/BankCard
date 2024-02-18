@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="create-table-person" author="uPagge">
+        <createTable tableName="person">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="surname" type="varchar(30)"/>
+            <column name="name" type="varchar(30)"/>
+            <column name="birthday" type="date"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-account" author="uPagge">
+        <createTable tableName="account">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="card_number" type="varchar(16)"/>
+            <column name="balance" type="bigint"/>
+            <column name="salary_status" type="bool"/>
+            <column name="person_id" type="int">
+                <constraints foreignKeyName="account_person_person_id" references="person(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

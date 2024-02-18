@@ -21,7 +21,7 @@ public class Person {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Size(min = 2, max = 30, message = "Surname should be between 2 and 30 characters")
