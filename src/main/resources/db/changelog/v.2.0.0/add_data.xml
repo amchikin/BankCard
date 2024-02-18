@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="insert-into-person" author="uPagge">
+        <insert tableName="person">
+            <column name="surname" value="Brown"/>
+            <column name="name" value="Drew"/>
+            <column name="birthday" value="1995-01-01"/>
+        </insert>
+        <insert tableName="person">
+            <column name="surname" value="Cook"/>
+            <column name="name" value="John"/>
+            <column name="birthday" value="1993-01-01"/>
+        </insert>
+        <insert tableName="person">
+            <column name="surname" value="Blue"/>
+            <column name="name" value="Nick"/>
+            <column name="birthday" value="1998-02-02"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet id="insert-into-account" author="uPagge">
+        <insert tableName="account">
+            <column name="card_number" value="1111222233334444"/>
+            <column name="balance" value="100"/>
+            <column name="salary_status" value="true"/>
+            <column name="person_id" value="1"/>
+        </insert>
+        <insert tableName="account">
+            <column name="card_number" value="1111222233335555"/>
+            <column name="balance" value="1000"/>
+            <column name="salary_status" value="false"/>
+            <column name="person_id" value="1"/>
+        </insert>
+        <insert tableName="account">
+            <column name="card_number" value="1111222233336666"/>
+            <column name="balance" value="10"/>
+            <column name="salary_status" value="false"/>
+            <column name="person_id" value="1"/>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>
