@@ -45,7 +45,7 @@ public class PeopleServiceTests {
     ShowCardsMapper showCardsMapper = Mappers.getMapper(ShowCardsMapper.class);
 
     @Test
-    void testGetPersonList() {
+    void getPersonDtoList_test() {
         //Arrange
         PersonDto personDto1 = PersonDto.builder().surname("Surname1").name("Name1").birthday(LocalDate.parse("2000-01-01")).build();
         PersonDto personDto2 = PersonDto.builder().surname("Surname2").name("Name2").birthday(LocalDate.parse("2000-02-02")).build();
@@ -65,7 +65,7 @@ public class PeopleServiceTests {
     }
 
     @Test
-    void testGetPersonByIdOrThrow_findCase() {
+    void getPersonByIdOrThrow_findCase_test() {
         //Arrange
         PersonDto expectedPersonDto = PersonDto.builder().surname("Surname1").name("Name1").birthday(LocalDate.parse("2000-01-01")).build();
 
@@ -80,8 +80,8 @@ public class PeopleServiceTests {
     }
 
     @Test
-//TODO переделать - не то
-    void testGetPersonByIdOrThrow_notFindCase() {
+//TODO консультация с Богданом
+    void getPersonByIdOrThrow_notFindCase_test() {
         //Arrange
         given(peopleRepository.findById(1)).willReturn(null);
 
@@ -93,7 +93,7 @@ public class PeopleServiceTests {
     }
 
     @Test
-    void testSavePersonRqDto() {
+    void savePersonRqDto_test() {
         //Arrange
         PersonSaveDto expectedPersonSaveDto = PersonSaveDto.builder().surname("Surname1").name("Name1").birthday(LocalDate.parse("2000-01-01")).build();
         Person person1 = Person.builder().surname("Surname1").name("Name1").birthday(LocalDate.parse("2000-01-01")).build();
@@ -107,7 +107,7 @@ public class PeopleServiceTests {
     }
 
     @Test
-    void testGetCardsByPersonId() {
+    void getCardsByPersonId_test() {
         //Arrange
         AccountDto accountDto1 = AccountDto.builder().cardNumber("1111888888888888").balance(new BigInteger("10")).build();
         AccountDto accountDto2 = AccountDto.builder().cardNumber("2222888888888888").balance(new BigInteger("5")).build();
@@ -121,17 +121,15 @@ public class PeopleServiceTests {
                 id(1).surname("TestSurname").name("TestName").birthday(LocalDate.parse("2000-01-01")).
                 accounts(accountDtoList.stream().map(accountMapper::map).collect(Collectors.toList())).build();
 
-        //ShowCardsDto showCardsDto1 = ShowCardsDto.builder().fio("TestSurname TestName").accounts(accountDtoList).build();
-
         given(peopleRepository.findById(1)).willReturn(Optional.of(person));
 
         //Aсt
-        ShowCardsDto showCardsDto = peopleService.getCardsByPersonId(person.getId());//TODO не могу получить доступ к ShowCardsMapper в сервисном слое(там он null). Почему?
+        ShowCardsDto showCardsDto = peopleService.getCardsByPersonId(person.getId());
 
         //Assert
         assertThat(showCardsDto.getAccounts().size()).isEqualTo(3);
-        assertThat(showCardsDto.getAccounts().get(0).getCardNumber()).isEqualTo(new BigInteger("1"));
-        assertThat(showCardsDto.getAccounts().get(1).getCardNumber()).isEqualTo(new BigInteger("5"));
-        assertThat(showCardsDto.getAccounts().get(2).getCardNumber()).isEqualTo(new BigInteger("10"));
+        assertThat(showCardsDto.getAccounts().get(0).getBalance()).isEqualTo(new BigInteger("1"));
+        assertThat(showCardsDto.getAccounts().get(1).getBalance()).isEqualTo(new BigInteger("5"));
+        assertThat(showCardsDto.getAccounts().get(2).getBalance()).isEqualTo(new BigInteger("10"));
     }
 }
