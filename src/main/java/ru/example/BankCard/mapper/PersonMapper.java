@@ -7,6 +7,5 @@ import ru.example.BankCard.entity.Person;
 @Mapper(componentModel = "spring")
 public interface PersonMapper {
     Person map(PersonDto personDto);
-
     PersonDto map(Person person);
 }

@@ -11,12 +11,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.example.BankCard.dto.AccountDto;
+import ru.example.BankCard.dto.ShowAllAccountDto;
 import ru.example.BankCard.dto.PersonDto;
 import ru.example.BankCard.dto.PersonSaveDto;
 import ru.example.BankCard.dto.ShowCardsDto;
 import ru.example.BankCard.entity.Person;
-import ru.example.BankCard.mapper.AccountMapper;
+import ru.example.BankCard.mapper.ShowAllAccountMapper;
 import ru.example.BankCard.mapper.PersonMapper;
 import ru.example.BankCard.mapper.PersonSaveMapper;
 import ru.example.BankCard.mapper.ShowCardsMapper;
@@ -40,7 +40,7 @@ public class PeopleServiceTests {
     @Spy
     PersonSaveMapper personSaveMapper = Mappers.getMapper(PersonSaveMapper.class);
     @Spy
-    AccountMapper accountMapper = Mappers.getMapper(AccountMapper.class);
+    ShowAllAccountMapper showAllAccountMapper = Mappers.getMapper(ShowAllAccountMapper.class);
     @Spy
     ShowCardsMapper showCardsMapper = Mappers.getMapper(ShowCardsMapper.class);
 
@@ -109,17 +109,17 @@ public class PeopleServiceTests {
     @Test
     void getCardsByPersonId_test() {
         //Arrange
-        AccountDto accountDto1 = AccountDto.builder().cardNumber("1111888888888888").balance(new BigInteger("10")).build();
-        AccountDto accountDto2 = AccountDto.builder().cardNumber("2222888888888888").balance(new BigInteger("5")).build();
-        AccountDto accountDto3 = AccountDto.builder().cardNumber("3333888888888888").balance(new BigInteger("1")).build();
-        List<AccountDto> accountDtoList = new ArrayList<>();
-        accountDtoList.add(accountDto1);
-        accountDtoList.add(accountDto2);
-        accountDtoList.add(accountDto3);
+        ShowAllAccountDto showAllAccountDto1 = ShowAllAccountDto.builder().cardNumber("1111888888888888").balance(new BigInteger("10")).build();
+        ShowAllAccountDto showAllAccountDto2 = ShowAllAccountDto.builder().cardNumber("2222888888888888").balance(new BigInteger("5")).build();
+        ShowAllAccountDto showAllAccountDto3 = ShowAllAccountDto.builder().cardNumber("3333888888888888").balance(new BigInteger("1")).build();
+        List<ShowAllAccountDto> showAllAccountDtoList = new ArrayList<>();
+        showAllAccountDtoList.add(showAllAccountDto1);
+        showAllAccountDtoList.add(showAllAccountDto2);
+        showAllAccountDtoList.add(showAllAccountDto3);
 
         Person person = Person.builder().
                 id(1).surname("TestSurname").name("TestName").birthday(LocalDate.parse("2000-01-01")).
-                accounts(accountDtoList.stream().map(accountMapper::map).collect(Collectors.toList())).build();
+                accounts(showAllAccountDtoList.stream().map(showAllAccountMapper::map).collect(Collectors.toList())).build();
 
         given(peopleRepository.findById(1)).willReturn(Optional.of(person));
 

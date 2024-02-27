@@ -3,18 +3,12 @@ package ru.example.BankCard.dto;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.math.BigInteger;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-public class AccountDto {
+public class AccountSaveResponseDto {
 
     @NotEmpty(message = "Поле номера карты не должно быть пустым")
     @Size(min = 16, max = 16, message = "Размер номера карты ровно 16")
@@ -22,4 +16,8 @@ public class AccountDto {
 
     @Min(value = 0, message = "Баланс не может быть отрицательным")
     private BigInteger balance;
+
+    private Boolean isSalary;
+
+    private Integer personId;
 }

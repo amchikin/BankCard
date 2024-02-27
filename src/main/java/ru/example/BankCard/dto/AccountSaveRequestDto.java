@@ -8,7 +8,7 @@ import lombok.Data;
 import java.math.BigInteger;
 
 @Data
-public class AccountSaveDto {
+public class AccountSaveRequestDto {
 
     private Integer id;
 
@@ -18,6 +18,8 @@ public class AccountSaveDto {
 
     @Min(value = 0, message = "Баланс не может быть отрицательным")
     private BigInteger balance;
+
     private Boolean isSalary;
+
     private Integer personId;
 }
