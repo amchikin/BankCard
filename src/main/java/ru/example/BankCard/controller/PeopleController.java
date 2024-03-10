@@ -2,11 +2,11 @@ package ru.example.BankCard.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.example.BankCard.dto.PersonSaveDto;
-import ru.example.BankCard.dto.ShowCardsDto;
+import ru.example.BankCard.dto.*;
 import ru.example.BankCard.service.PeopleService;
-import ru.example.BankCard.dto.PersonDto;
 
 import java.util.List;
 
@@ -22,9 +22,8 @@ public class PeopleController {
     }
 
     @PostMapping()
-    public String createPerson(@RequestBody @Valid PersonSaveDto personSaveDto) {
-        personSaveDto = peopleService.savePersonRqDto(personSaveDto);
-        return String.format("Person with id %d has been created.", personSaveDto.getId());
+    public ResponseEntity<PersonSaveResponseDto> createPerson(@RequestBody @Valid PersonSaveRequestDto personSaveRequestDto) {
+        return new ResponseEntity<>(peopleService.savePersonRequestDto(personSaveRequestDto), HttpStatus.CREATED);
     }
 
     /**

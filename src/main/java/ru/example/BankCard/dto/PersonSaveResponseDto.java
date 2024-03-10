@@ -1,20 +1,15 @@
 package ru.example.BankCard.dto;
 
-import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-public class PersonSaveDto {
+public class PersonSaveResponseDto {
 
     private Integer id;
 
@@ -29,4 +24,5 @@ public class PersonSaveDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Data should not be empty")
     private LocalDate birthday;
+
 }

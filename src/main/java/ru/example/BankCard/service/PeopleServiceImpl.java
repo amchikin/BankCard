@@ -5,13 +5,15 @@ import org.springframework.stereotype.Service;
 
 import ru.example.BankCard.dto.PersonDto;
 
-import ru.example.BankCard.dto.PersonSaveDto;
+import ru.example.BankCard.dto.PersonSaveRequestDto;
+import ru.example.BankCard.dto.PersonSaveResponseDto;
 import ru.example.BankCard.dto.ShowCardsDto;
 import ru.example.BankCard.entity.Account;
 import ru.example.BankCard.mapper.PersonMapper;
 
 
-import ru.example.BankCard.mapper.PersonSaveMapper;
+import ru.example.BankCard.mapper.PersonSaveRequestMapper;
+import ru.example.BankCard.mapper.PersonSaveResponseMapper;
 import ru.example.BankCard.mapper.ShowCardsMapper;
 import ru.example.BankCard.repository.PeopleRepository;
 import ru.example.BankCard.entity.Person;
@@ -25,10 +27,12 @@ import java.util.stream.Collectors;
 public class PeopleServiceImpl implements PeopleService {
     private final PeopleRepository peopleRepository;
     private final PersonMapper personMapper;
-    private final PersonSaveMapper personSaveMapper;
+    private final PersonSaveRequestMapper personSaveRequestMapper;
+    private final PersonSaveResponseMapper personSaveResponseMapper;
     private final ShowCardsMapper showCardsMapper;
 
-    @Override public List<PersonDto> getPersonDtoList() {
+    @Override
+    public List<PersonDto> getPersonDtoList() {
         return peopleRepository.findAll().stream().map(personMapper::map).collect(Collectors.toList());
     }
 
@@ -41,9 +45,9 @@ public class PeopleServiceImpl implements PeopleService {
     }
 
     @Override
-    public PersonSaveDto savePersonRqDto(PersonSaveDto personSaveDto) {
-        return personSaveMapper.map(peopleRepository.
-                save(personSaveMapper.map(personSaveDto)));
+    public PersonSaveResponseDto savePersonRequestDto(PersonSaveRequestDto personSaveRequestDto) {
+        return personSaveResponseMapper.map(peopleRepository.
+                save(personSaveRequestMapper.map(personSaveRequestDto)));
     }
 
     @Override

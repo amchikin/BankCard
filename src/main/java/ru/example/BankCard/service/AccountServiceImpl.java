@@ -35,7 +35,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountSaveResponseDto saveAccountRequestDto(AccountSaveRequestDto accountSaveRequestDto) {
-        return accountSaveResponseMapper.map(accountsRepository.save(accountSaveRequestMapper.map(accountSaveRequestDto)));
+        return accountSaveResponseMapper.map(accountsRepository.
+                save(accountSaveRequestMapper.map(accountSaveRequestDto)));
     }
 
     @Override
