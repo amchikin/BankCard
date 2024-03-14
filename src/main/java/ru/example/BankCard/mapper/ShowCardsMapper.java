@@ -6,7 +6,7 @@ import org.mapstruct.Named;
 import ru.example.BankCard.dto.ShowCardsDto;
 import ru.example.BankCard.entity.Person;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {ShowAllAccountMapper.class})
 public interface ShowCardsMapper {
     Person map(ShowCardsDto showCardsDto);
 
