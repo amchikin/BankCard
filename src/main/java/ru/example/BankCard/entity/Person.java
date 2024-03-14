@@ -8,7 +8,6 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -35,7 +34,7 @@ public class Person {
     private String name;
 
     @Column(name = "birthday")
-    @DateTimeFormat(pattern = "yyyy-MM-dd") // TODO Add Spring Validator
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Data should not be empty")
     private LocalDate birthday;
 

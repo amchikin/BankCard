@@ -11,15 +11,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.example.BankCard.dto.PersonSaveRequestDto;
-import ru.example.BankCard.dto.ShowAllAccountDto;
-import ru.example.BankCard.dto.PersonDto;
-import ru.example.BankCard.dto.ShowCardsDto;
+import ru.example.BankCard.dto.*;
 import ru.example.BankCard.entity.Person;
-import ru.example.BankCard.mapper.ShowAllAccountMapper;
-import ru.example.BankCard.mapper.PersonMapper;
-import ru.example.BankCard.mapper.PersonSaveRequestMapper;
-import ru.example.BankCard.mapper.ShowCardsMapper;
+import ru.example.BankCard.mapper.*;
 import ru.example.BankCard.repository.PeopleRepository;
 import ru.example.BankCard.service.PeopleServiceImpl;
 import java.math.BigInteger;
@@ -42,8 +36,9 @@ public class PeopleServiceTests {
     @Spy
     ShowAllAccountMapper showAllAccountMapper = Mappers.getMapper(ShowAllAccountMapper.class);
     @Spy
+    PersonSaveResponseMapper personSaveResponseMapper = Mappers.getMapper(PersonSaveResponseMapper.class);
+    @Spy
     ShowCardsMapper showCardsMapper = Mappers.getMapper(ShowCardsMapper.class);
-
     @Test
     void getPersonDtoList_test() {
         //Arrange
@@ -80,8 +75,7 @@ public class PeopleServiceTests {
     }
 
     @Test
-//TODO консультация с Богданом
-    void getPersonByIdOrThrow_notFindCase_test() {
+    void getPersonByIdOrThrow_notFindCase_test() {      //TODO консультация с Богданом про данный тест
         //Arrange
         given(peopleRepository.findById(1)).willReturn(null);
 
@@ -92,20 +86,20 @@ public class PeopleServiceTests {
         assertThrows(RuntimeException.class, actual);
     }
 
-//    @Test
-//    void savePersonRqDto_test() {
-//        //Arrange
-//        PersonSaveRequestDto expectedPersonSaveRequestDto = PersonSaveRequestDto.builder().surname("Surname1").name("Name1").birthday(LocalDate.parse("2000-01-01")).build();
-//        Person person1 = Person.builder().surname("Surname1").name("Name1").birthday(LocalDate.parse("2000-01-01")).build();
-//        given(peopleRepository.save(personSaveRequestMapper.map(expectedPersonSaveRequestDto))).willReturn(person1);
-//
-//        //Aсt
-//        PersonSaveRequestDto actualPersonDto = peopleService.savePersonRequestDto(expectedPersonSaveRequestDto);
-//
-//        //Assert
-//        assertThat(actualPersonDto).isEqualTo(expectedPersonSaveRequestDto);
-//    }
+    @Test
+    void savePersonRqDto_test() {
+        //Arrange
+        PersonSaveResponseDto expectedPersonSaveResponseDto = PersonSaveResponseDto.builder().surname("Surname1").name("Name1").birthday(LocalDate.parse("2000-01-01")).build();
+        PersonSaveRequestDto personSaveRequestDto = PersonSaveRequestDto.builder().surname("Surname1").name("Name1").birthday(LocalDate.parse("2000-01-01")).build();
+        Person person1 = Person.builder().surname("Surname1").name("Name1").birthday(LocalDate.parse("2000-01-01")).build();
+        given(peopleRepository.save(personSaveRequestMapper.map(personSaveRequestDto))).willReturn(person1);
 
+        //Aсt
+        PersonSaveResponseDto actualPersonSaveResponseDto = peopleService.savePersonRequestDto(personSaveRequestDto);
+
+        //Assert
+        assertThat(actualPersonSaveResponseDto).isEqualTo(expectedPersonSaveResponseDto);
+    }
     @Test
     void getCardsByPersonId_test() {
         //Arrange

@@ -6,7 +6,8 @@ import org.mapstruct.Named;
 import ru.example.BankCard.dto.ShowCardsDto;
 import ru.example.BankCard.entity.Person;
 
-@Mapper(componentModel = "spring", uses = {ShowAllAccountMapper.class})
+//@Mapper(componentModel = "spring", uses = {ShowAllAccountMapper.class}) //TODO Спросить!!! Если это раскоммитить, то тест проходить не будет. Сейчас есть null при выводе.
+@Mapper(componentModel = "spring")
 public interface ShowCardsMapper {
     Person map(ShowCardsDto showCardsDto);
 

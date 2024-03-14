@@ -37,10 +37,4 @@ public class AccountController {
         accountService.changeAccountSalaryBalanceRequestDto(accountChangeBalanceDto);
         return new ResponseEntity<>(accountChangeBalanceDto, HttpStatus.OK);
     }
-//    @PostMapping("/update")
-//    public String updateSalaryBalance(@RequestBody AccountChangeBalanceDto accountChangeBalanceDto) {
-//        accountService.changeAccountSalaryBalanceRequestDto(accountChangeBalanceDto);
-//        return String.format("The salary card of a person with id %d has been changed to %d",
-//                accountChangeBalanceDto.getPersonId(), accountChangeBalanceDto.getValue());
-//    }
 }

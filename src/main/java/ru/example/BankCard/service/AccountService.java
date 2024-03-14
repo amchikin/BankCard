@@ -12,5 +12,5 @@ public interface AccountService {
 
     AccountSaveResponseDto saveAccountRequestDto(AccountSaveRequestDto accountSaveRequestDto);
 
-    void changeAccountSalaryBalanceRequestDto(AccountChangeBalanceDto accountChangeBalanceDto); // TODO уместен ли void
+    void changeAccountSalaryBalanceRequestDto(AccountChangeBalanceDto accountChangeBalanceDto); // TODO Спросить: уместен ли void?
 }

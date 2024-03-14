@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import ru.example.BankCard.dto.PersonSaveResponseDto;
 import ru.example.BankCard.entity.Person;
 
-@Mapper(componentModel = "spring") //TODO Check without it
+@Mapper(componentModel = "spring")
 public interface PersonSaveResponseMapper {
     Person map(PersonSaveResponseDto personSaveResponseDto);
 
