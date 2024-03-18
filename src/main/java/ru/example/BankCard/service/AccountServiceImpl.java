@@ -2,17 +2,13 @@ package ru.example.BankCard.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.example.BankCard.dto.AccountChangeBalanceDto;
-import ru.example.BankCard.dto.ShowAllAccountDto;
-import ru.example.BankCard.dto.AccountSaveRequestDto;
-import ru.example.BankCard.dto.AccountSaveResponseDto;
+import ru.example.BankCard.dto.*;
 import ru.example.BankCard.entity.Account;
+import ru.example.BankCard.entity.Person;
 import ru.example.BankCard.exception.AccountChangeBalanceException;
-import ru.example.BankCard.mapper.AccountChangeBalanceMapper;
-import ru.example.BankCard.mapper.ShowAllAccountMapper;
-import ru.example.BankCard.mapper.AccountSaveRequestMapper;
+import ru.example.BankCard.exception.NotFoundException;
+import ru.example.BankCard.mapper.*;
 
-import ru.example.BankCard.mapper.AccountSaveResponseMapper;
 import ru.example.BankCard.repository.AccountsRepository;
 
 import java.math.BigInteger;
@@ -27,6 +23,7 @@ public class AccountServiceImpl implements AccountService {
     private final AccountSaveRequestMapper accountSaveRequestMapper;
     private final AccountChangeBalanceMapper accountChangeBalanceMapper;
     private final AccountSaveResponseMapper accountSaveResponseMapper;
+    private final AccountMapper accountMapper;
 
     @Override
     public List<ShowAllAccountDto> getAccountList() {
@@ -48,5 +45,25 @@ public class AccountServiceImpl implements AccountService {
             account.setBalance(newBalance);
             accountsRepository.save(account);
         } else throw new AccountChangeBalanceException("The balance cannot be negative");
+    }
+
+    @Override
+    public AccountDto getAccountByIdOrThrow(Integer id) {
+        return accountMapper.map(accountsRepository.findById(id).
+                orElseThrow(() ->
+                        new NotFoundException(
+                                String.format("Account with id %d does not exist in the database.", id))));
+    }
+
+    @Override
+    public UpdateAccountDto updateAccountById(UpdateAccountDto updateAccountDto, Integer id) {
+        Account account = accountsRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(
+                        String.format("Account with id %d does not exist in the database.", id)));
+        account.setCardNumber(updateAccountDto.getCardNumber());
+        account.setBalance(updateAccountDto.getBalance());
+        account.setIsSalary(updateAccountDto.getIsSalary());
+        accountsRepository.save(account);
+        return updateAccountDto;
     }
 }

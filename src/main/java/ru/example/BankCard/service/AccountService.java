@@ -1,9 +1,6 @@
 package ru.example.BankCard.service;
 
-import ru.example.BankCard.dto.AccountChangeBalanceDto;
-import ru.example.BankCard.dto.ShowAllAccountDto;
-import ru.example.BankCard.dto.AccountSaveRequestDto;
-import ru.example.BankCard.dto.AccountSaveResponseDto;
+import ru.example.BankCard.dto.*;
 
 import java.util.List;
 
@@ -13,4 +10,8 @@ public interface AccountService {
     AccountSaveResponseDto saveAccountRequestDto(AccountSaveRequestDto accountSaveRequestDto);
 
     void changeAccountSalaryBalanceRequestDto(AccountChangeBalanceDto accountChangeBalanceDto); // TODO Спросить: уместен ли void?
+
+    AccountDto getAccountByIdOrThrow(Integer id);
+
+    UpdateAccountDto updateAccountById(UpdateAccountDto updateAccountDto, Integer id);
 }

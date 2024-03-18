@@ -5,10 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.example.BankCard.dto.AccountChangeBalanceDto;
-import ru.example.BankCard.dto.ShowAllAccountDto;
-import ru.example.BankCard.dto.AccountSaveRequestDto;
-import ru.example.BankCard.dto.AccountSaveResponseDto;
+import ru.example.BankCard.dto.*;
 import ru.example.BankCard.service.AccountService;
 
 import java.util.List;
@@ -36,5 +33,14 @@ public class AccountController {
     public  ResponseEntity<AccountChangeBalanceDto> updateSalaryBalance(@RequestBody AccountChangeBalanceDto accountChangeBalanceDto) {
         accountService.changeAccountSalaryBalanceRequestDto(accountChangeBalanceDto);
         return new ResponseEntity<>(accountChangeBalanceDto, HttpStatus.OK);
+    }
+    @GetMapping("/{id}")
+    public AccountDto showAccount(@PathVariable("id") Integer id) {
+        return accountService.getAccountByIdOrThrow(id);
+    }
+
+    @PatchMapping("/{id}")
+    public UpdateAccountDto updatePerson(@RequestBody @Valid UpdateAccountDto updateAccountDto, @PathVariable("id") Integer id) {
+        return accountService.updateAccountById(updateAccountDto, id);
     }
 }

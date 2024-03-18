@@ -41,4 +41,8 @@ public class PeopleController {
     public ShowCardsDto showCards(@PathVariable("id") Integer id) {
         return peopleService.getCardsByPersonId(id);
     }
+    @PatchMapping("/{id}")
+    public UpdatePersonDto updatePerson(@RequestBody @Valid UpdatePersonDto updatePersonDto, @PathVariable("id") Integer id) {
+        return peopleService.updatePersonById(updatePersonDto, id);
+    }
 }

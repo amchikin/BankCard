@@ -3,18 +3,12 @@ package ru.example.BankCard.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import ru.example.BankCard.dto.PersonDto;
+import ru.example.BankCard.dto.*;
 
-import ru.example.BankCard.dto.PersonSaveRequestDto;
-import ru.example.BankCard.dto.PersonSaveResponseDto;
-import ru.example.BankCard.dto.ShowCardsDto;
 import ru.example.BankCard.entity.Account;
-import ru.example.BankCard.mapper.PersonMapper;
+import ru.example.BankCard.mapper.*;
 
 
-import ru.example.BankCard.mapper.PersonSaveRequestMapper;
-import ru.example.BankCard.mapper.PersonSaveResponseMapper;
-import ru.example.BankCard.mapper.ShowCardsMapper;
 import ru.example.BankCard.repository.PeopleRepository;
 import ru.example.BankCard.entity.Person;
 import ru.example.BankCard.exception.NotFoundException;
@@ -60,5 +54,17 @@ public class PeopleServiceImpl implements PeopleService {
             return showCardsMapper.map(person);
         }
         return null;
+    }
+
+    @Override
+    public UpdatePersonDto updatePersonById(UpdatePersonDto updatePersonDto, Integer id) {
+        Person person = peopleRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(
+                        String.format("Person with id %d does not exist in the database.", id)));
+        person.setSurname(updatePersonDto.getSurname());
+        person.setName(updatePersonDto.getName());
+        person.setBirthday(updatePersonDto.getBirthday());
+        peopleRepository.save(person);
+        return updatePersonDto;
     }
 }
