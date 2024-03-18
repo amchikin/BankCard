@@ -15,7 +15,6 @@ import ru.example.BankCard.mapper.PersonMapper;
 import ru.example.BankCard.mapper.PersonSaveRequestMapper;
 import ru.example.BankCard.mapper.PersonSaveResponseMapper;
 import ru.example.BankCard.mapper.ShowCardsMapper;
-import ru.example.BankCard.repository.EntityRepository;
 import ru.example.BankCard.repository.PeopleRepository;
 import ru.example.BankCard.entity.Person;
 import ru.example.BankCard.exception.NotFoundException;
@@ -31,7 +30,6 @@ public class PeopleServiceImpl implements PeopleService {
     private final PersonSaveRequestMapper personSaveRequestMapper;
     private final PersonSaveResponseMapper personSaveResponseMapper;
     private final ShowCardsMapper showCardsMapper;
-    private final EntityRepository entityRepository;
 
     @Override
     public List<PersonDto> getPersonDtoList() {
@@ -54,9 +52,13 @@ public class PeopleServiceImpl implements PeopleService {
 
     @Override
     public ShowCardsDto getCardsByPersonId(Integer id) {
-        Person person = entityRepository.findById(id);
-        person.setAccounts(person.getAccounts().stream().sorted(Comparator.comparing(Account::getBalance)).collect(Collectors.toList()));
-        return showCardsMapper.map(person);
-
+        Person person = peopleRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(
+                        String.format("Person with id %d does not exist in the database.", id)));
+        if (person.getAccounts() != null) {
+            person.setAccounts(person.getAccounts().stream().sorted(Comparator.comparing(Account::getBalance)).collect(Collectors.toList()));
+            return showCardsMapper.map(person);
+        }
+        return null;
     }
 }
