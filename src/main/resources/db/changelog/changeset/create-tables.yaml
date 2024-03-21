@@ -1,0 +1,66 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-Person
+      author: AMChikin
+      changes:
+        - createTable:
+            tableName: person
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: surname
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: birthday
+                  type: date
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: create-table-Account
+      author: AMChikin
+      changes:
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: card_number
+                  type: varchar(16)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: balance
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: salary_status
+                  type: bool
+                  constraints:
+                    nullable: false
+              - column:
+                  name: person_id
+                  type: int
+                  constraints:
+                    foreignKeyName: person_account_fk
+                    referencedTableName: person
+                    referencedColumnNames: id
