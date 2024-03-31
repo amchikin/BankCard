@@ -30,9 +30,8 @@ public class AccountController {
      * Update salary card by personId. If the balance becomes negative, then a readable exception
      */
     @PostMapping("/update")
-    public  ResponseEntity<AccountChangeBalanceDto> updateSalaryBalance(@RequestBody AccountChangeBalanceDto accountChangeBalanceDto) {
-        accountService.changeAccountSalaryBalanceRequestDto(accountChangeBalanceDto);
-        return new ResponseEntity<>(accountChangeBalanceDto, HttpStatus.OK);
+    public ResponseEntity<AccountChangeBalanceResponseDto> updateSalaryBalance(@RequestBody AccountChangeBalanceRequestDto accountChangeBalanceRequestDto) {
+        return new ResponseEntity<>(accountService.changeAccountSalaryBalanceRequestDto(accountChangeBalanceRequestDto), HttpStatus.OK);
     }
     @GetMapping("/{id}")
     public AccountDto showAccount(@PathVariable("id") Integer id) {

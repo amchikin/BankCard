@@ -1,15 +1,15 @@
-package ru.example.BankCard.service;
+package ru.example.BankCard.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.example.BankCard.dto.*;
 import ru.example.BankCard.entity.Account;
-import ru.example.BankCard.entity.Person;
 import ru.example.BankCard.exception.AccountChangeBalanceException;
 import ru.example.BankCard.exception.NotFoundException;
 import ru.example.BankCard.mapper.*;
 
 import ru.example.BankCard.repository.AccountsRepository;
+import ru.example.BankCard.service.AccountService;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -21,9 +21,10 @@ public class AccountServiceImpl implements AccountService {
     private final AccountsRepository accountsRepository;
     private final ShowAllAccountMapper showAllAccountMapper;
     private final AccountSaveRequestMapper accountSaveRequestMapper;
-    private final AccountChangeBalanceMapper accountChangeBalanceMapper;
+    private final AccountChangeBalanceRequestMapper accountChangeBalanceRequestMapper;
     private final AccountSaveResponseMapper accountSaveResponseMapper;
     private final AccountMapper accountMapper;
+    private final AccountChangeBalanceResponseMapper accountChangeBalanceResponseMapper;
 
     @Override
     public List<ShowAllAccountDto> getAccountList() {
@@ -37,13 +38,14 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void changeAccountSalaryBalanceRequestDto(AccountChangeBalanceDto accountChangeBalanceDto)
+    public AccountChangeBalanceResponseDto changeAccountSalaryBalanceRequestDto(AccountChangeBalanceRequestDto accountChangeBalanceRequestDto)
             throws AccountChangeBalanceException {
-        Account account = accountsRepository.findAccountsByOwnerAndAndIsSalaryTrue(accountChangeBalanceMapper.map(accountChangeBalanceDto).getOwner());
-        BigInteger newBalance = account.getBalance().add(accountChangeBalanceMapper.map(accountChangeBalanceDto).getBalance());
+        Account account = accountsRepository.findAccountsByOwnerAndAndIsSalaryTrue(accountChangeBalanceRequestMapper.map(accountChangeBalanceRequestDto).getOwner());
+        BigInteger newBalance = account.getBalance().add(accountChangeBalanceRequestMapper.map(accountChangeBalanceRequestDto).getBalance());
         if (newBalance.signum() == 1 || newBalance.signum() == 0) {
             account.setBalance(newBalance);
             accountsRepository.save(account);
+            return accountChangeBalanceResponseMapper.map(account);
         } else throw new AccountChangeBalanceException("The balance cannot be negative");
     }
 

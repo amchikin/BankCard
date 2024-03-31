@@ -15,7 +15,7 @@ import ru.example.BankCard.dto.*;
 import ru.example.BankCard.entity.Person;
 import ru.example.BankCard.mapper.*;
 import ru.example.BankCard.repository.PeopleRepository;
-import ru.example.BankCard.service.PeopleServiceImpl;
+import ru.example.BankCard.service.impl.PeopleServiceImpl;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;

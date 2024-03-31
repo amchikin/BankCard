@@ -5,7 +5,7 @@ import lombok.Data;
 import java.math.BigInteger;
 
 @Data
-public class AccountChangeBalanceDto {
+public class AccountChangeBalanceRequestDto {
 
     private Integer personId;
 

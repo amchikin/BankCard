@@ -1,4 +1,4 @@
-package ru.example.BankCard.service;
+package ru.example.BankCard.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,6 +12,7 @@ import ru.example.BankCard.mapper.*;
 import ru.example.BankCard.repository.PeopleRepository;
 import ru.example.BankCard.entity.Person;
 import ru.example.BankCard.exception.NotFoundException;
+import ru.example.BankCard.service.PeopleService;
 
 import java.util.*;
 import java.util.stream.Collectors;
