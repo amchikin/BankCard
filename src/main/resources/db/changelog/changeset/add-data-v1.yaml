@@ -1,0 +1,88 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-data
+      author: AMChikin
+      changes:
+        - insert:
+            tableName: person
+            columns:
+              - column:
+                  name: surname
+                  value: Holden
+              - column:
+                  name: name
+                  value: John
+              - column:
+                  name: birthday
+                  value: 1977-02-02
+        - insert:
+            tableName: person
+            columns:
+              - column:
+                  name: surname
+                  value: Borisov
+              - column:
+                  name: name
+                  value: Evgenii
+              - column:
+                  name: birthday
+                  value: 1975-12-30
+        - insert:
+            tableName: person
+            columns:
+              - column:
+                  name: surname
+                  value: Schilt
+              - column:
+                  name: name
+                  value: Gerbert
+              - column:
+                  name: birthday
+                  value: 1955-01-01
+        - insert:
+            tableName: account
+            columns:
+              - column:
+                  name: card_number
+                  value: 1111222233334444
+              - column:
+                  name: balance
+                  value: 100
+              - column:
+                  name: salary_status
+                  value: false
+              - column:
+                  name: person_id
+                  value: 1
+        - insert:
+            tableName: account
+            columns:
+              - column:
+                  name: card_number
+                  value: 1111222233335555
+              - column:
+                  name: balance
+                  value: 1
+              - column:
+                  name: salary_status
+                  value: true
+              - column:
+                  name: person_id
+                  value: 1
+        - insert:
+            tableName: account
+            columns:
+              - column:
+                  name: card_number
+                  value: 1111222233335555
+              - column:
+                  name: balance
+                  value: 100000200
+              - column:
+                  name: salary_status
+                  value: false
+              - column:
+                  name: person_id
+                  value: 1
+
+
