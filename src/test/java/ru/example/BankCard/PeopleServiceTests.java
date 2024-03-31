@@ -75,7 +75,7 @@ public class PeopleServiceTests {
     }
 
     @Test
-    void getPersonByIdOrThrow_notFindCase_test() {      //TODO консультация с Богданом про данный тест
+    void getPersonByIdOrThrow_notFindCase_test() {
         //Arrange
         given(peopleRepository.findById(1)).willReturn(null);
 

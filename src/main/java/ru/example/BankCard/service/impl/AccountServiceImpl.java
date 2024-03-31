@@ -50,7 +50,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountDto getAccountByIdOrThrow(Integer id) {
+    public ShowAllAccountDto getAccountByIdOrThrow(Integer id) {
         return accountMapper.map(accountsRepository.findById(id).
                 orElseThrow(() ->
                         new NotFoundException(

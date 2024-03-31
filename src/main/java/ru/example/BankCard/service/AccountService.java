@@ -9,9 +9,9 @@ public interface AccountService {
 
     AccountSaveResponseDto saveAccountRequestDto(AccountSaveRequestDto accountSaveRequestDto);
 
-    AccountChangeBalanceResponseDto changeAccountSalaryBalanceRequestDto(AccountChangeBalanceRequestDto accountChangeBalanceRequestDto); // TODO Спросить: уместен ли void?
+    AccountChangeBalanceResponseDto changeAccountSalaryBalanceRequestDto(AccountChangeBalanceRequestDto accountChangeBalanceRequestDto);
 
-    AccountDto getAccountByIdOrThrow(Integer id);
+    ShowAllAccountDto getAccountByIdOrThrow(Integer id);
 
     UpdateAccountDto updateAccountById(UpdateAccountDto updateAccountDto, Integer id);
 }

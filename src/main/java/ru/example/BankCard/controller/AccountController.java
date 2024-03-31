@@ -34,7 +34,7 @@ public class AccountController {
         return new ResponseEntity<>(accountService.changeAccountSalaryBalanceRequestDto(accountChangeBalanceRequestDto), HttpStatus.OK);
     }
     @GetMapping("/{id}")
-    public AccountDto showAccount(@PathVariable("id") Integer id) {
+    public ShowAllAccountDto showAccount(@PathVariable("id") Integer id) {
         return accountService.getAccountByIdOrThrow(id);
     }
 

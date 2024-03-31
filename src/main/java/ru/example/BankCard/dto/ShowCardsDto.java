@@ -15,5 +15,5 @@ public class ShowCardsDto {
 
     private String fio;
 
-    private List<ShowAllAccountDto> accounts;
+    private List<AccountDto> accounts;
 }
